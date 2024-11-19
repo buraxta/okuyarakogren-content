@@ -1,0 +1,108 @@
+---
+title: ""
+metaTitle: "Getting started with Prisma Pulse"
+metaDescription: "Learn how to get up and running with Prisma Pulse."
+sidebar_label: "Giriş"
+tocDepth: 4
+toc: true
+---
+
+import {
+  Bolt,
+  BorderBox,
+  BoxTitle,
+  Inspect,
+  Database,
+  Grid,
+  LinkCard,
+  List,
+  SignalStream,
+  SquareLogo,
+} from '@site/src/components/GettingStarted';
+
+<TopBlock>
+
+<BorderBox>
+
+<BoxTitle>Hoş Geldiniz 👋</BoxTitle>
+
+<span style={{ fontSize: '24px' }}>
+-> Dart, Google’ın mühendislerinden çıkan, kod yazmayı eğlenceli hale getiren modern bir programlama dilidir. İster web ister mobil uygulama geliştirin, Dart hızı, esnekliği ve kolay öğrenilebilirliğiyle size eşlik etmeye hazır. Ayrıca, Flutter sayesinde Dart, mobil dünyada adeta yıldız gibi parlıyor!
+
+Hadi dart dilini biraz daha yakından tanıyalım.
+</span>
+
+</BorderBox>
+
+</TopBlock>
+
+## Dart Nedir?
+* Dart, Google tarafından geliştirilen, modern yazılım geliştirme süreçlerini desteklemek amacıyla tasarlanmış açık kaynaklı bir programlama dilidir. Nesne Yönelimli Programlama **(Object-Oriented Programming - OOP)** paradigmasını temel alır ve sınıf tabanlı bir yapı sunar. Dart, OOP'nin yapı taşları olan sınıflar **(classes)**, nesneler **(objects)**, kalıtım **(inheritance)**, çok biçimlilik **(polymorphism)**, soyutlama **(abstraction)** ve kapsülleme **(encapsulation)** gibi özellikleri destekler. Bu sayede, büyük ölçekli ve yeniden kullanılabilir kod yapıları oluşturmayı kolaylaştırır.
+
+* Dart, aynı zamanda fonksiyonel programlama **(functional programming)** paradigmalarını da benimser. Birinci sınıf fonksiyonlar **(first-class functions)**, anonim fonksiyonlar **(anonymous functions)** ve lambda ifadeleri **(lambda expressions)** gibi modern programlama konseptlerini destekler. Statik tip kontrolü **(static typing)** ve dinamik tip desteği **(dynamic typing)** arasında esneklik sunarak, hem güvenli hem de esnek kod yazılmasına olanak tanır. Bu kombinasyon, geliştiricilere derleme sırasında **(compile-time)** veya çalışma zamanında **(runtime)** farklı ihtiyaçlara uygun çözümler sunar.
+
+* Dart, hem Just-in-Time **(JIT)** hem de Ahead-of-Time **(AOT)** derleme tekniklerini destekler. JIT derleme, geliştirme sırasında hızlı prototipleme yapılmasını sağlarken, AOT derleme, üretim ortamında yüksek performanslı uygulamalar oluşturur. Dart'ın **garbage collection** mekanizması, bellek yönetimini otomatize ederek performans ve güvenilirlik sağlar.
+
+* Dart, framework tabanlı bir geliştirme ortamında güçlü bir rol oynar ve özellikle Google’ın çok platformlu geliştirme çözümü olan Flutter ile entegre çalışır. Dart sayesinde, bir kez yazılan kod, web, mobil (iOS ve Android), masaüstü (Windows, macOS, Linux) gibi farklı platformlarda çalışabilir. Web uygulamaları için JavaScript'e transpile edilebilmesi, Dart'ı yalnızca mobil değil, modern web geliştirme süreçlerinde de önemli bir araç haline getirir. Tüm bu özellikler, Dart'ı performans, ölçeklenebilirlik ve geliştirici deneyimi açısından güçlü ve kapsamlı bir programlama dili yapar.
+
+## Dart Neden Kullanılır?
+
+**1. Performans ve Verimlilik**
+
+* Dart, doğrudan yerel makine koduna derlenebilir. Bu, uygulamaların hızlı çalışmasını sağlar.
+Aynı zamanda, web için JavaScript koduna derlenebilir, bu da Dart'ı web uygulamaları için uygun hale getirir.
+
+**2. Kullanım Kolaylığı ve Öğrenilebilirlik**
+
+* Dart'ın söz dizimi (syntax) birçok geliştiriciye tanıdık gelir; özellikle JavaScript, Java, C# ve Python gibi dilleri bilenler için kolay bir öğrenme eğrisi sunar.
+
+**2. Çok Platformlu Uygulama Geliştirme**
+
+* Dart, bir kod tabanı ile Android, iOS, web ve masaüstü uygulamaları geliştirme imkanı sağlar.
+Flutter çerçevesiyle birlikte çalışarak hem görsel hem de işlevsel açıdan güçlü uygulamalar üretir.
+
+**3. Güçlü Araç Desteği**
+
+* Dart için sunulan entegre araçlar (örneğin, DartPad, IntelliJ IDEA veya VS Code eklentileri) geliştirme sürecini hızlandırır ve hataları kolayca bulup düzeltmenizi sağlar.
+
+**4. Aktif Topluluk ve Sürekli Geliştirme**
+
+* Dart, Google tarafından desteklenir ve düzenli güncellemelerle geliştirilir. Ayrıca, Flutter'ın popülerliği ile büyüyen bir topluluğa sahiptir.
+
+## Dart hangi alanlarda kullanabilirim?
+
+**1. Mobil Uygulama Geliştirme (Piyasadaki En Güçlü Alanı)**
+
+* Dart, mobil geliştirme dünyasında en çok Flutter Framework ile tanınır. Android ve iOS için performanslı ve modern uygulamalar geliştirmek isteyen ekipler tarafından tercih edilir. Flutter, widget tabanlı mimarisi sayesinde, zengin kullanıcı arayüzleri oluşturmayı kolaylaştırır ve tek bir kod tabanı ile iki platformda birden uygulama geliştirme imkanı sağlar.
+
+* Piyasa Avantajları:
+Platform bağımsız geliştirme
+Hızlı prototipleme
+Yüksek performans
+
+* Mobil uygulama geliştirme, Dart'ın piyasa açısından en güçlü olduğu alandır. Flutter'ın popülerliği sayesinde, Dart bu alanda büyük bir avantaja sahiptir.
+
+**2. Web Uygulamaları (Sınırlı Piyasa Kullanımı)**
+* Dart, tarayıcı uyumlu hale getirilmek için JavaScript'e transpile edilebilir. Web geliştirme için Dart, genellikle Flutter for Web çerçevesinde kullanılır. Flutter ile bir mobil projeyi web uygulamasına dönüştürmek mümkündür. Ancak, sıfırdan web uygulaması geliştirme süreçlerinde Dart genellikle tercih edilmez.
+
+* Dart, web projelerinde nadiren tercih edilir. Bunun yerine React, Angular veya Vue.js gibi JavaScript ekosisteminin güçlü araçları daha yaygındır.
+Dart'ın web alanındaki varlığı büyük ölçüde Flutter projelerinin genişletilmesiyle sınırlıdır.
+
+**3. Masaüstü Uygulama Geliştirme (Küçük Pazar Payı)**
+* Dart, masaüstü platformları (Windows, macOS, Linux) destekleyen bir çözüm sunar. Flutter Desktop, özellikle mobil uygulamaların masaüstü platformlarına genişletilmesinde kullanılır. Ancak bağımsız masaüstü uygulamaları geliştirme konusunda Dart, Electron veya Qt gibi teknolojilerle rekabet etmekte zorlanır.
+
+* Masaüstü uygulamalarında Dart, niş bir çözümdür ve genellikle Flutter projelerinin uzantısı olarak görülür.
+Büyük ölçekli masaüstü projelerde yaygın değildir.
+
+**4. İki Boyutlu Oyun Geliştirme (2D Games)**
+* Dart, oyun geliştirme alanında doğrudan bir framework sunmasa da, Flame Engine gibi üçüncü taraf oyun motorlarıyla 2D oyunlar geliştirmek mümkündür. Flame, Flutter üzerine inşa edilmiş hafif bir oyun motorudur ve Dart'ın performansı ile birlikte basit oyunlar için uygun bir altyapı sunar.
+
+* Kullanım Alanları:\
+Basit mobil oyunlar\
+Arcade tarzı 2D oyunlar\
+Eğitim projeleri veya hobi amaçlı oyun geliştirme\
+
+* Dart, oyun geliştirme sektöründe ana akım bir dil değildir. Unity (C#) ve Unreal Engine (C++) gibi güçlü oyun motorları sektöre hakimdir.
+Ancak, basit 2D oyunlar veya Flutter ekosistemine bağlı uygulamalar için Dart ve Flame, etkili bir alternatif olabilir.
+
+

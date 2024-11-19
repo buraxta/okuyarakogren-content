@@ -1,0 +1,132 @@
+---
+title: ""
+metaTitle: "Getting started with Prisma Pulse"
+metaDescription: "Learn how to get up and running with Prisma Pulse."
+sidebar_label: "Değişkenler"
+tocDepth: 4
+toc: true
+---
+
+import {
+  Bolt,
+  BorderBox,
+  BoxTitle,
+  Inspect,
+  Database,
+  Grid,
+  LinkCard,
+  List,
+  SignalStream,
+  SquareLogo,
+} from '@site/src/components/GettingStarted';
+
+<BorderBox>
+<BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
+<span style={{ fontSize: '24px' }}>
+Şimdi kodlama dünyasının temel taşlarından birine adım atıyoruz: Değişkenler (Variables)!\
+Değişkenler, programların hafızası gibidir; bilgileri saklar, taşır ve gerektiğinde senin için işleme alır. 
+
+Bir sihirli kutu düşün: İçine bir sayı, bir isim ya da bir kelime koyabilirsin. İşte değişkenler tam da böyle çalışır! Kodunun enerjisi ve zekası buradan gelir. Hazır mısın? Değişkenlerin büyülü dünyasına dalıyoruz! 🚀
+</span>
+</BorderBox>
+
+## **1. Değişken Tanımlama ve Başlatma**
+
+```ts
+var name = 'Okuyarak Öğren';
+```
+
+* Bu satırda:\
+``var`` anahtar kelimesi ile bir değişken tanımlanır.\
+``name`` adlı değişken, "Okuyarak Öğren" adlı bir String objesine referans verir.
+
+* Eğer değişken türünü açıkça belirtmek isterseniz, ``String`` gibi bir tür kullanabilirsiniz:
+
+```ts
+String name = 'Okuyarak Öğren';
+```
+
+## **2. Tür Çıkarımı (Type Inference)**
+
+* Dart, değişken türlerini otomatik olarak anlayabilir. Bu nedenle var kullanıldığında, Dart türü otomatik olarak belirler. Ancak türü açıkça belirtmek isterseniz, ilgili türü yazabilirsiniz.
+
+```ts
+Object name = 5 ;                // name herhangi bir türde değer alabilir.
+String name = 'Okuyarak Öğren';  // name sadece String türünde değer alabilir.
+```
+
+## **3. Null Safety (Boş Değere Karşı Güvenlik)**
+
+* Dart, ``null`` güvenliği ile çalışır. Bu, bir değişkenin boş (null) değere sahip olmasından kaynaklanan hataları önler.`
+
+### Değişken Türleri ve Null Güvenliği:
+
+``String?`` gibi bir tür, boş değeri (null) alabilir.
+``String`` gibi bir tür ise boş olamaz, yani bir başlangıç değeri atanmalıdır.
+
+```ts
+String? name;           // Boş olabilir
+String surname = 'Doe'; // Boş olamaz
+```
+
+### Zorunlu Başlangıç Değeri:
+
+* Boş olamayacak bir değişkeni mutlaka başlatmanız gerekir:
+
+```ts
+int number = 13; // Başlangıç değeri zorunlu
+```
+
+## **4. Late Anahtar Kelimesi**
+
+* ``late``, bir değişkenin başlatılmasını daha sonra yapacağınızı belirtir. Dart derleyicisi bu durumu kabul eder.
+
+```ts
+late String description;
+description = 'Dart is fun!';
+```
+
+:::warning
+Ancak, ``late`` değişkeni kullanmadan önce başlatmanız gerekir; aksi halde çalışma zamanında hata alırsınız.
+:::
+
+## **5. Final ve Const Değişkenler**
+
+* Eğer bir değişkenin değerini değiştirmek istemiyorsanız, final veya const kullanabilirsiniz.
+
+:::note
+Örnek değişkenler final olabilir ancak const olamaz.
+:::
+
+* Final: Değişken sadece bir kez atanabilir. Değeri çalışma zamanında belirlenir.
+
+```ts
+final name = 'Okuyarak Öğren';
+```
+
+* Const: Değeri derleme zamanında sabitlenir ve değiştirilemez.
+
+```ts
+const pi = 3.14;
+```
+
+### final vs const
+
+-> **final kullanılacak durumlar**
+
+1. Çalışma Zamanında Belirlenen Değerler:
+*   Değerin çalışma zamanında belirlendiği ancak sonrasında değiştirilmeyeceği durumlarda final kullanılır.\
+Örneğin, bir API'den alınan veriler veya kullanıcıdan alınan girişler.
+
+2. Değerler Dinamik Olarak Atanabilir:
+Eğer değer çalışma zamanında bir işlem veya hesaplama sonucunda belirlenecekse, final uygun bir tercihtir.
+
+-> **const Kullanılacak Durumlar**
+
+1. Derleme Zamanında Sabitler:
+* Derleme zamanı sabitleri (örn. matematiksel sabitler veya yapılandırma değerleri) için const kullanılır.\
+Bu, değişkenin her yerde aynı kalmasını garanti eder.
+
+2. Sabit Koleksiyonlar:
+Koleksiyonlar (listeler, haritalar) içindeki tüm öğeler derleme zamanında sabitse, const ile tanımlanabilirler.\
+Bu, koleksiyonun içeriğinin değişmeyeceğini garanti eder.
