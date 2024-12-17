@@ -1,24 +1,247 @@
 ---
-title: "Operatorler"
-layout: "okuyarakogren-content"
-topic: "Operatörler"
-description: "Bu derste oparatör hakkında genel bir bilgilendirme yapılmaktadır."
-slug: dart/3_
-prev_page: /dart/2_
-prev_title: "Değişkenler"
-next_title: "Deneme"
-next_page: /dart/deneme
-git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/3_.mdx
+
+title: ""
+metaTitle: "Getting started with Prisma Pulse"
+metaDescription: "Learn how to get up and running with Prisma Pulse."
+sidebar_label: "Yorum Satırı"
+tocDepth: 4
+toc: true
+
 ---
+
+import {
+  Bolt,
+  BorderBox,
+  BoxTitle,
+  Inspect,
+  Database,
+  Grid,
+  LinkCard,
+  List,
+  SignalStream,
+  SquareLogo,
+} from '@site/src/components/GettingStarted';
 
 <BorderBox>
 <BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
 <span style={{ fontSize: '24px' }}>
-Kod dünyasının gizli süper kahramanlarıyla tanışmaya hazır mısın?\
-Evet, operatörlerden bahsediyoruz!\
-Operatörler, kodunu anlamlı hale getiren küçük ama etkili araçlardır. Onlar olmadan toplama yapamaz, karşılaştırmalar gerçekleştiremez ve hatta en basit kararları bile veremezdik!
-
-Bir matematikçi gibi toplama-çıkarma yapabilir, bir dedektif gibi eşitlikleri sorgulayabilir ya da bir büyücü gibi bitlerle oynayabilirsin. Hazırsan, operatörlerin sihirli dünyasına dalıyoruz. Hadi, kodun gücünü hisset!
-
+Kodun sessiz kahramanlarıyla yorum satırlarıyla tanışmaya hazır mısın?\
+Onlar kodunuzun gizli günlükçüleri, gelecekteki siz için bıraktığınız notlarve ekip arkadaşlarınız için yazdığınız mektuplar gibidir!\
+Bir dedektif gibi kodu aydınlatmak, bir öğretmen gibi açıklamak veya
+bir hikaye anlatıcısı gibi kodunuzu belgelemek için buradalar.\
+Hadi, kodunuza biraz renk katalım! 📝✨
 </span>
 </BorderBox>
+
+
+## Tek satırlık yorumlar
+
+* Tek satırlık bir yorum `//` ile başlar.
+* `//` ile satır sonu arasındaki her şey Dart derleyicisi tarafından yok sayılır.
+
+```Dart
+void main() {
+  // Okuyarak Öğren
+  print('Hello World!');
+}
+```
+
+## Çok satırlı yorumlar
+
+* Çok satırlı bir yorum `/*` ile başlar ve `*/` ile biter . `/*` ve `*/` arasındaki her şey Dart derleyicisi tarafından yok sayılır. Çok satırlı yorumlar iç içe geçebilir.
+
+```
+void main() {
+/* 
+  Bu bir çoklu yorum satırıdır.
+  İstediğiniz kadar satır ekleyebilirsiniz!
+  Dart bunu görmezden gelecektir 
+*/
+}
+```
+
+## Belgeleme yorumları
+
+* Documentation comments, Dart'ta kod dokümantasyonu oluşturmak için kullanılan özel yorum satırlarıdır. Bu yorumlar, dart doc aracı tarafından otomatik olarak işlenerek güzel bir API dokümantasyonuna dönüştürülür.
+
+* Documentation comments iki şekilde yazılabilir:
+    - Tek satırlı format: ///
+    - Çok satırlı format: /**  */
+
+```
+/// Bu bir tek satırlı documentation comment örneğidir
+void birMethod() {}
+
+/** 
+  Bu ise çok satırlı
+  documentation comment örneğidir
+*/
+void digerMethod() {}
+```
+
+:::note
+Documentation comments içinde köşeli parantez [] kullanarak kodunuzdaki diğer elemanlara referans verebilirsiniz.
+:::
+
+### En İyi Uygulamalar
+
+1. **Açıklayıcı Olun**
+
+* Her public API elemanını dokümante edin
+* Methodların ne yaptığını net bir şekilde açıklayın
+* Parametrelerin ne işe yaradığını belirtin
+
+
+2. **Format Kuralları**
+
+* Her documentation comment bir tam cümle ile başlamalı
+* Noktalama işaretlerine dikkat edin
+* Paragraflar arasında boş satır bırakın
+
+
+3. **Örnekler Ekleyin**
+```
+/// String'i tersine çevirir.
+///
+/// Örnek:
+/// ```dart
+/// print(reverseString('hello')); // Çıktı: 'olleh'
+/// ```
+String reverseString(String input) {
+  return input.split('').reversed.join();
+}
+```
+
+4. Özel Durumları Belirtin
+
+* Methodun fırlatacağı exception'ları belirtin
+* Null olabilecek değerleri işaretleyin
+* Performans uyarılarını ekleyin
+
+### Dart Doc Etiketleri
+
+* @deprecated - Kullanımdan kaldırılmış API'ları işaretler
+* @override - Override edilmiş methodları belirtir
+* @required - Zorunlu parametreleri işaretler
+* @todo - Yapılacak işleri belirtir
+
+```
+/// Bu eski bir method, bunun yerine [yeniMethod] kullanın.
+@deprecated
+void eskiMethod() {}
+```
+
+* İyi yazılmış documentation comments:
+
+    - Kodunuzu daha anlaşılır kılar
+    - Ekip içi iletişimi kolaylaştırır
+    - Otomatik dokümantasyon oluşturmayı sağlar
+    - Kodunuzun bakımını kolaylaştırır
+## Quiz
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu örnekte üçüncü satırdaki yorum türü nedir?
+```
+// Bu bir yorum satırı
+/* Bu bir çoklu
+   yorum satırı */
+/// Bu nasıl bir yorum satırı?
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+Documentation comment (Belgeleme yorumu). Bu tür yorumlar /// ile başlar ve Dart Doc tarafından otomatik olarak API dokümantasyonu oluşturmak için kullanılır.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu kod geçerli midir? Neden?
+```
+/*
+  Bu bir yorum
+  /* Bu da içeride bir yorum */
+  Hala yorum içindeyiz
+*/
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+Evet, geçerlidir. Çünkü Dart'ta çok satırlı yorumlar iç içe (nested) olabilir.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Aşağıdaki documentation comment'te köşeli parantezlerin [[]] amacı nedir?
+```
+/// [name] parametresi kullanıcının adını alır
+/// [age] parametresi kullanıcının yaşını alır
+void createUser(String name, int age) {}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+Köşeli parantezler, documentation comments içinde kod elemanlarına (parametreler, methodlar, sınıflar vb.) referans vermek için kullanılır.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu iki yorum satırı arasındaki temel fark nedir?
+```
+// TODO: Bu methodu güncelle
+void oldMethod() {}
+
+/// @deprecated 'newMethod()' kullanın
+void oldMethod2() {}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+İlk satır basit bir TODO yorumu iken, ikinci satır bir documentation comment ve @deprecated etiketidir. İkincisi Dart Doc tarafından işlenir ve resmi dokümantasyonda görünür.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu kod parçasında kaç farklı yorum stili kullanılmıştır?
+```
+void calculate() {
+  // Bu bir yorum
+  int x = 5; // Bu da bir yorum
+  /* Bu da
+     bir yorum */
+}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+2 farklı yorum stili kullanılmıştır:
+
+Tek satırlık yorumlar (//)
+Çok satırlı yorumlar (/* */)
+<br/>
+</TabItem> 
+</TabbedContent> 
