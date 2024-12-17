@@ -1,0 +1,235 @@
+---
+
+title: ""
+metaTitle: "Getting started with Prisma Pulse"
+metaDescription: "Learn how to get up and running with Prisma Pulse."
+sidebar_label: "Libraries & imports"
+tocDepth: 4
+toc: true
+
+---
+
+import {
+  Bolt,
+  BorderBox,
+  BoxTitle,
+  Inspect,
+  Database,
+  Grid,
+  LinkCard,
+  List,
+  SignalStream,
+  SquareLogo,
+} from '@site/src/components/GettingStarted';
+
+<BorderBox>
+<BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
+<span style={{ fontSize: '24px' }}>
+Dart'ın muhteşem LEGO setine Libraries & Imports'a hoş geldiniz!\
+Bu harika yapı taşlarıyla kodunuzu modüler hale getirebilir,başkalarının kodlarını kendi projenize dahil edebilir ve kendi kod kütüphanenizi oluşturabilirsiniz.\
+Bir mimar gibi tasarla, bir koleksiyoner gibi topla ve
+bir usta gibi birleştir. Kodun yapı ustaları iş başına! 🏰
+</span>
+</BorderBox>
+
+## Genel Bakış
+
+* Libraries ve import direktifleri, modüler ve paylaşılabilir bir kod tabanı oluşturmanıza yardımcı olur. Libraries sadece API'ler sağlamakla kalmaz, aynı zamanda bir gizlilik birimidir: alt çizgi (_) ile başlayan tanımlayıcılar yalnızca library içinde görünürdür. Her Dart dosyası (ve parçaları), library direktifini kullanmasa bile bir library'dir.
+
+* Libraries'ler packages kullanılarak dağıtılabilir.
+
+:::note
+Dart'ın public veya private gibi erişim belirleyici anahtar kelimeler yerine alt çizgi kullanmasının nedenini öğrenmek için [SDK issue 3338](https://github.com/dart-lang/sdk/issues/33383)'e bakabilirsiniz.
+:::
+
+## Libraries Kullanımı
+
+* Bir library'den gelen namespace'in başka bir library kapsamında nasıl kullanılacağını belirtmek için import kullanılır.
+
+* Örneğin, Dart web uygulamaları genellikle dart:html library'sini şu şekilde import eder:
+
+```
+import 'dart:html';
+```
+
+* Import için gerekli tek argüman, library'yi belirten bir URI'dir. Yerleşik library'ler için URI, özel dart: şemasına sahiptir. Diğer library'ler için dosya sistemi yolu veya package: şemasını kullanabilirsiniz:
+
+```
+import 'package:test/test.dart';
+```
+
+## Library Prefix Belirleme
+
+* İki library'de çakışan tanımlayıcılar varsa, bir veya her iki library için prefix belirtebilirsiniz:
+
+```
+import 'package:lib1/lib1.dart';
+import 'package:lib2/lib2.dart' as lib2;
+
+// lib1'den Element kullanır
+Element element1 = Element();
+
+// lib2'den Element kullanır
+lib2.Element element2 = lib2.Element();
+```
+
+## Library'nin Bir Kısmını Import Etme
+
+* Bir library'nin yalnızca bir kısmını kullanmak istiyorsanız, seçici olarak import edebilirsiniz:
+
+```
+// Sadece foo'yu import et
+import 'package:lib1/lib1.dart' show foo;
+
+// foo HARİÇ tüm isimleri import et
+import 'package:lib2/lib2.dart' hide foo;
+```
+
+## Lazy Loading Library
+
+* Deferred loading (lazy loading olarak da bilinir), bir web uygulamasının bir library'yi ihtiyaç duyulduğunda yüklemesine olanak tanır. Deferred loading'i şu durumlarda kullanabilirsiniz:
+
+    - Web uygulamasının başlangıç süresini azaltma
+    - A/B testing yapma
+    - Nadiren kullanılan özellikleri yükleme
+
+* Library'yi lazy load etmek için, önce deferred as kullanarak import edin:
+
+```
+import 'package:greetings/hello.dart' deferred as hello;
+```
+
+* Library'ye ihtiyaç duyduğunuzda, loadLibrary()'yi çağırın:
+
+```
+Future<void> greet() async {
+  await hello.loadLibrary();
+  hello.printGreeting();
+}
+```
+
+## Library Directive
+
+* Library seviyesinde doc comments veya metadata annotations belirtmek için, dosyanın başında bir library bildirimine ekleyin:
+
+```
+/// Harika bir test library'si.
+@TestOn('browser')
+library;
+```
+
+## Libraries Oluşturma
+* Bir package oluşturmak için şu konulara dikkat edin:
+
+    - Library kaynak kodunu nasıl düzenleyeceğiniz
+    - Export directive'ini ne zaman kullanacağınız
+    - Part directive'ini ne zaman kullanacağınız
+    - Birden çok platformu destekleyen bir library için conditional imports ve exports nasıl kullanılır
+
+
+## Quiz
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu kod çalıştığında ne olur ve neden iki farklı import şekli kullanılmış?
+```
+import 'dart:math';
+import 'dart:math' as mathematics;
+
+void main() {
+  print(sqrt(16));
+  print(mathematics.sqrt(16));
+}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+Kod çalışır ve her iki print de 4.0 değerini yazdırır. İkinci import 'as' keyword'ü ile bir prefix kullanır. Bu örnek gereksiz bir kullanımdır çünkü aynı kütüphaneyi iki kez import eder. Prefix'ler genellikle isim çakışmalarını önlemek için farklı kütüphaneler arasında kullanılır.
+<br/>
+</TabItem> 
+</TabbedContent>
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu import ifadesi ne yapar?
+```
+// lib1.dart içerisinde foo ve bar fonksiyonları var
+import 'package:example/lib1.dart' show foo;
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+show keyword'ü ile yapılan bu import, lib1.dart dosyasından sadece foo fonksiyonunu import eder. Diğer tüm öğeler (örneğin bar fonksiyonu) import edilmez. Bu, seçici import yaparak sadece ihtiyacımız olan parçaları almamızı sağlar.
+<br/>
+</TabItem> 
+</TabbedContent>
+
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+deferred as kullanmanın amacı nedir?
+```
+import 'package:greetings/hello.dart' deferred as hello;
+
+Future<void> greetLater() async {
+  print('Starting...');
+  await hello.loadLibrary();
+  hello.sayHello();
+}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+deferred as lazy loading (geç yükleme) için kullanılır. Bu sayede kütüphane başlangıçta değil, sadece ihtiyaç duyulduğunda yüklenir. Bu özellikle web uygulamalarında başlangıç yükleme süresini azaltmak için kullanışlıdır.
+<br/>
+</TabItem> 
+</TabbedContent>
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Dart'ta bir sınıfı private yapmak için neden alt çizgi (_) kullanılır ve bu sınıfa başka dosyalardan erişilebilir mi?
+```
+class _PrivateClass {
+  void doSomething() {}
+}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+Alt çizgi (_) ile başlayan isimler sadece kendi library'si içinde görünür olur. _PrivateClass'a sadece tanımlandığı dosyadan erişilebilir, başka dosyalardan erişilemez. Dart'ta bu yöntem, geleneksel private, public keyword'leri yerine kullanılır.
+<br/>
+</TabItem> 
+</TabbedContent>
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bir dosyada library keyword'ü kullanılmasa bile o dosya bir library sayılır mı?
+```
+// math_lib.dart
+library math_lib;
+
+// main.dart
+import 'math_lib.dart';
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+Evet. Dart'ta her dosya, library direktifini açıkça kullanmasa bile bir library'dir. library keyword'ü opsiyoneldir ve genellikle library'ye isim vermek veya metadata eklemek için kullanılır.
+<br/>
+</TabItem> 
+</TabbedContent>
