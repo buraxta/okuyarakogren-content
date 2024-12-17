@@ -1,0 +1,202 @@
+---
+
+title: ""
+metaTitle: "Getting started with Prisma Pulse"
+metaDescription: "Learn how to get up and running with Prisma Pulse."
+sidebar_label: "Metadata"
+tocDepth: 4
+toc: true
+
+---
+
+
+import {
+  Bolt,
+  BorderBox,
+  BoxTitle,
+  Inspect,
+  Database,
+  Grid,
+  LinkCard,
+  List,
+  SignalStream,
+  SquareLogo,
+} from '@site/src/components/GettingStarted';
+
+<BorderBox>
+<BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
+<span style={{ fontSize: '24px' }}>
+ Kodunuza süper güçler kazandırmaya hazır mısınız?\
+ İşte karşınızda Metadata!
+ Bu küçük `@` işaretli süper kahramanlar, kodunuza ekstra bilgiler ekler,
+ özel yetenekler kazandırır ve onu daha akıllı hale getirir.\
+ Bir süper kahraman gibi kodunuzu güçlendirecek, bir etiketleyici gibi
+ organize edecek ve bir büyücü gibi özel yetenekler katacaksınız.\
+ Metadata büyüsü başlasın! ✨
+</span>
+</BorderBox>
+
+* Kodunuz hakkında ek bilgi vermek için meta verileri kullanın. Bir meta veri açıklaması `@` karakteriyle başlar ve bunu derleme zamanı sabitine (örneğin deprecated) bir başvuru veya sabit oluşturucuya bir çağrı izler.
+
+* Tüm Dart kodlarında dört açıklama mevcuttur: `@Deprecated`, `@deprecated`, `@override` ve `@pragma`. `@override` kullanımına ilişkin örnekler için bkz. Bir sınıfı genişletme. İşte `@Deprecated` açıklamasının kullanımına ilişkin bir örnek:
+
+```
+class Television {
+  /// Bunun yerine gücü açmak için [turnOn]'u kullanın.
+  @Deprecated('Use turnOn instead')
+  void activate() {
+    turnOn();
+  }
+
+  /// Televizyonun gücünü açar.
+  void turnOn() {...}
+  // ···
+}
+```
+
+* Bir mesaj belirtmek istemiyorsanız `@deprecated` kullanabilirsiniz. Ancak, her zaman `@Deprecated` ile bir mesaj belirtmenizi öneririz.
+
+* Kendi meta veri açıklamalarınızı tanımlayabilirsiniz. İşte iki argüman alan bir `@Todo` açıklaması tanımlamanın bir örneği:
+
+```
+class Todo {
+  final String who;
+  final String what;
+
+  const Todo(this.who, this.what);
+}
+```
+
+* Ve işte `@Todo` ek açıklamasının kullanımına dair bir örnek:
+
+```
+@Todo('Dash', 'Implement this function')
+void doSomething() {
+  print('Do something');
+}
+```
+
+## Quiz
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu iki annotation arasındaki fark nedir ve hangisini kullanmak daha iyi bir pratiktir?
+```
+@deprecated
+void oldFunction() {}
+
+@Deprecated('Use newFunction() instead')
+void anotherOldFunction() {}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+@Deprecated mesaj parametresi alırken, @deprecated almaz. Dart'ta @Deprecated kullanmak ve bir açıklama mesajı eklemek daha iyi bir pratiktir çünkü diğer geliştiricilere hangi alternatifi kullanmaları gerektiğini açıkça belirtir.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu kod çalışır mı? Eğer çalışırsa, ne işe yarar?
+```
+class Task {
+  final String assignee;
+  final String description;
+
+  const Task(this.assignee, this.description);
+}
+
+@Task('Ali', 'Fix login bug')
+void updateLogin() {}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+Evet, çalışır. Bu, özel bir metadata annotation'ıdır. Task sınıfı bir metadata olarak kullanılabilir çünkü const constructor'a sahip. Bu annotation, updateLogin fonksiyonuna görevin kime atandığı ve ne yapılması gerektiği bilgisini ekler.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+@override annotation'ı burada ne işe yarıyor?
+```
+class Animal {
+  void makeSound() {}
+}
+
+class Dog extends Animal {
+  @override
+  void makeSound() {
+    print('Woof!');
+  }
+}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+@override annotation'ı, bir metodun üst sınıftaki bir metodu override ettiğini (yeniden tanımladığını) açıkça belirtir. Bu, kodun okunabilirliğini artırır ve yanlışlıkla yanlış metot imzası kullanılmasını önler.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bir kod parçasına birden fazla metadata annotation eklenebilir mi? Bu örnekte ne oluyor?
+```
+@Todo('Alice', 'Complete this')
+@Deprecated('Use newFunction instead')
+void oldFunction() {}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+Evet, birden fazla metadata annotation eklenebilir. Bu örnekte, fonksiyon hem yapılması gereken bir işi (@Todo) belirtiyor, hem de kullanımdan kaldırılmış (@Deprecated) olduğunu gösteriyor.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu kodda metadata olarak kullanılan sınıfın constructor'ı neden const olmalıdır?
+```
+class Logger {
+  final String prefix;
+  const Logger(this.prefix);
+}
+
+class Debug extends Logger {
+  const Debug() : super('DEBUG');
+}
+
+@Debug()
+void logMessage() {
+  print('Test message');
+}
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+Metadata'lar compile-time'da değerlendirilmelidir, bu yüzden constructor'ların const olması gerekir. const constructor'lar, derleme zamanında sabit değerler oluşturur ve bu değerler metadata olarak kullanılabilir.
+<br/>
+</TabItem> 
+</TabbedContent> 
