@@ -1,50 +1,210 @@
 ---
-title: "İndirme ve Kurma"
-layout: "okuyarakogren-content"
-topic: "İndirme ve Kurma"
-description: "Bu derste Dart hakkında genel bir bilgilendirme yapılmaktadır."
-slug: dart/1_
-prev_page: /dart/0_
-prev_title: "Dart'a Giriş"
-next_page: /dart/2_
-next_title: "Değişkenler"
-git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/1_.mdx
+title: ""
+metaTitle: "Getting started with Prisma Pulse"
+metaDescription: "Learn how to get up and running with Prisma Pulse."
+sidebar_label: "Değişkenler"
+tocDepth: 4
+toc: true
 ---
 
+import {
+  Bolt,
+  BorderBox,
+  BoxTitle,
+  Inspect,
+  Database,
+  Grid,
+  LinkCard,
+  List,
+  SignalStream,
+  SquareLogo,
+} from '@site/src/components/GettingStarted';
+
 <BorderBox>
-  <BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
-  <span style={{ fontSize: "24px" }}>
-    Dart dünyasına adım atmaya hazır mısın? Bu yolculukta seni hızlı ve eğlenceli bir başlangıç
-    bekliyor. Dart, seni mobil, web ve daha fazlasıyla buluşturacak güce sahip. Hazırsan klavyene
-    sıkıca tutun, çünkü şimdi Dart’ı nasıl kuracağını öğreniyoruz! 🚀
-  </span>
+<BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
+<span style={{ fontSize: '24px' }}>
+Şimdi kodlama dünyasının temel taşlarından birine adım atıyoruz: \
+Değişkenler (Variables)!
+Değişkenler, programların hafızası gibidir; bilgileri saklar, taşır ve gerektiğinde senin için işleme alır. 
+
+Bir sihirli kutu düşün: İçine bir sayı, bir isim ya da bir kelime koyabilirsin. İşte değişkenler tam da böyle çalışır! Kodunun enerjisi ve zekası buradan gelir. Hazır mısın? Değişkenlerin büyülü dünyasına dalıyoruz! 🚀
+</span>
 </BorderBox>
 
-<Alert type="tip">
-  Eğer Flutter SDK'sını kurduysanız veya kurmayı planlıyorsanız, Flutter SDK'sı zaten Dart SDK'sının
-  tamamını içerir. Bu nedenle, Dart programlama dilini kullanmak için Dart'ı ayrıca kurmanıza gerek
-  yoktur.
-</Alert>
+## **1. Değişken Tanımlama ve Başlatma**
 
-## Sistem Gereksinimleri
+```ts
+var name = 'Okuyarak Öğren';
+```
 
-## X i nasıl indirebilririm
+* Bu satırda:\
+``var`` anahtar kelimesi ile bir değişken tanımlanır.
+``name`` adlı değişken, "Okuyarak Öğren" adlı bir String objesine referans verir.
 
-> **windows**\
-> **linux**\
-> **macos**\
+* Eğer değişken türünü açıkça belirtmek isterseniz, ``String`` gibi bir tür kullanabilirsiniz:
 
-## Hangi IDE yi seçmeliyim
+```ts
+String name = 'Okuyarak Öğren';
+```
 
-- kısa bir ide kıyaslama
+## **2. Type Inference (Tür Çıkarımı)**
 
-## VS code da proje başlatma
+* Dart, değişken türlerini otomatik olarak anlayabilir. Bu nedenle var kullanıldığında, Dart türü otomatik olarak belirler. Ancak türü açıkça belirtmek isterseniz, ilgili türü yazabilirsiniz.
 
-- adım adım
+```ts
+Object name = 5 ;                // name herhangi bir türde değer alabilir.
+String name = 'Okuyarak Öğren';  // name sadece String türünde değer alabilir.
+```
 
-## NetBeans de proje başlatma
+## **3. Null Safety (Boş Değere Karşı Güvenlik)**
 
-## Komut isteminden proje başlatma
+* Dart, ``null`` güvenliği ile çalışır. Bu, bir değişkenin boş (null) değere sahip olmasından kaynaklanan hataları önler.`
 
-- kurulumun doğru ve projenın çalıştığını göster
-- java da main de print yaptır
+### Değişken Türleri ve Null Güvenliği:
+
+``String?`` gibi bir tür, boş değeri (null) alabilir.
+``String`` gibi bir tür ise boş olamaz, yani bir başlangıç değeri atanmalıdır.
+
+```ts
+String? name;           // Boş olabilir
+String surname = 'Doe'; // Boş olamaz
+```
+
+### Zorunlu Başlangıç Değeri:
+
+* Boş olamayacak bir değişkeni mutlaka başlatmanız gerekir:
+
+```ts
+int number = 13; // Başlangıç değeri zorunlu
+```
+
+## **4. Late Anahtar Kelimesi**
+
+* ``late``, bir değişkenin başlatılmasını daha sonra yapacağınızı belirtir. Dart derleyicisi bu durumu kabul eder.
+
+```ts
+late String description;
+description = 'Dart is fun!';
+```
+
+:::warning
+Ancak, ``late`` değişkeni kullanmadan önce başlatmanız gerekir; aksi halde çalışma zamanında hata alırsınız.
+:::
+
+## **5. Final ve Const Değişkenler**
+
+* Eğer bir değişkenin değerini değiştirmek istemiyorsanız, final veya const kullanabilirsiniz.
+
+:::note
+Örnek değişkenler final olabilir ancak const olamaz.
+:::
+
+* Final: Değişken sadece bir kez atanabilir. Değeri çalışma zamanında belirlenir.
+
+```ts
+final name = 'Okuyarak Öğren';
+```
+
+* Const: Değeri derleme zamanında sabitlenir ve değiştirilemez.
+
+```ts
+const pi = 3.14;
+```
+
+### final vs const
+
+-> **final kullanılacak durumlar**
+
+1. Çalışma Zamanında Belirlenen Değerler:
+*   Değerin çalışma zamanında belirlendiği ancak sonrasında değiştirilmeyeceği durumlarda final kullanılır.\
+Örneğin, bir API'den alınan veriler veya kullanıcıdan alınan girişler.
+
+2. Değerler Dinamik Olarak Atanabilir:
+Eğer değer çalışma zamanında bir işlem veya hesaplama sonucunda belirlenecekse, final uygun bir tercihtir.
+
+-> **const Kullanılacak Durumlar**
+
+1. Derleme Zamanında Sabitler:
+* Derleme zamanı sabitleri (örn. matematiksel sabitler veya yapılandırma değerleri) için const kullanılır.\
+Bu, değişkenin her yerde aynı kalmasını garanti eder.
+
+2. Sabit Koleksiyonlar:
+Koleksiyonlar (listeler, haritalar) içindeki tüm öğeler derleme zamanında sabitse, const ile tanımlanabilirler.\
+Bu, koleksiyonun içeriğinin değişmeyeceğini garanti eder.
+
+## Quiz
+
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Dart dilinde bir değişkeni null değer alabilir şekilde nasıl tanımlarsınız?
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+`String? name;` şeklinde değişken türünden sonra `?` işareti koyarak tanımlarız.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+final ve const arasındaki temel fark nedir?
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+final değişkenler çalışma zamanında (runtime) bir kez değer alabilirken, const değişkenler derleme zamanında (compile time) değer alır ve değerleri sabittir.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Dart'ta tür belirtmeden bir değişken nasıl tanımlanır ve buna ne ad verilir?
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+ var anahtar kelimesi kullanılarak tanımlanır (örn: var name = 'Okuyarak Öğren';) ve buna Type Inference (Tür Çıkarımı) denir.
+<br/>
+</TabItem> 
+</TabbedContent> 
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+late anahtar kelimesinin kullanım amacı nedir?
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+late, bir değişkenin değerinin daha sonra atanacağını belirtir. Ancak değişken kullanılmadan önce mutlaka değer atanmalıdır, aksi halde çalışma zamanında hata alınır.
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Aşağıdaki kod neden hatalıdır?
+```Dart
+String name;
+print(name);
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+Çünkü Dart'ın null safety özelliği gereği, String türündeki değişkenler (? olmadan tanımlandığında) null değer alamaz ve mutlaka başlangıç değeri atanmalıdır.
+<br/>
+</TabItem> 
+</TabbedContent> 
