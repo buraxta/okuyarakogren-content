@@ -1,125 +1,577 @@
 ---
-title: "Değişkenler"
-layout: "okuyarakogren-content"
-topic: "Değişkenler"
-description: "Bu derste değişkenler hakkında genel bir bilgilendirme yapılmaktadır."
-slug: dart/2_
-prev_page: /dart/1_
-prev_title: "İndirme ve Kurma"
-next_title: "Operatorler"
-next_page: /dart/3_
-git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/2_.mdx
+title: ""
+metaTitle: "Getting started with Prisma Pulse"
+metaDescription: "Learn how to get up and running with Prisma Pulse."
+sidebar_label: "Operatörler"
+tocDepth: 4
+toc: true
+
 ---
+
+import {
+  Bolt,
+  BorderBox,
+  BoxTitle,
+  Inspect,
+  Database,
+  Grid,
+  LinkCard,
+  List,
+  SignalStream,
+  SquareLogo,
+} from '@site/src/components/GettingStarted';
 
 <BorderBox>
 <BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
 <span style={{ fontSize: '24px' }}>
-Şimdi kodlama dünyasının temel taşlarından birine adım atıyoruz: Değişkenler (Variables)!\
-Değişkenler, programların hafızası gibidir; bilgileri saklar, taşır ve gerektiğinde senin için işleme alır.
+Kod dünyasının gizli süper kahramanlarıyla tanışmaya hazır mısın?\
+Evet, operatörlerden bahsediyoruz!\
+Operatörler, kodunu anlamlı hale getiren küçük ama etkili araçlardır. Onlar olmadan toplama yapamaz, karşılaştırmalar gerçekleştiremez ve hatta en basit kararları bile veremezdik!
 
-Bir sihirli kutu düşün: İçine bir sayı, bir isim ya da bir kelime koyabilirsin. İşte değişkenler tam da böyle çalışır! Kodunun enerjisi ve zekası buradan gelir. Hazır mısın? Değişkenlerin büyülü dünyasına dalıyoruz! 🚀
-
+Bir matematikçi gibi toplama-çıkarma yapabilir, bir dedektif gibi eşitlikleri sorgulayabilir ya da bir büyücü gibi bitlerle oynayabilirsin. Hazırsan, operatörlerin sihirli dünyasına dalıyoruz. Hadi, kodun gücünü hisset!
 </span>
 </BorderBox>
 
-## **1. Değişken Tanımlama ve Başlatma**
+## Operatörler
 
-```ts
-var name = "Okuyarak Öğren";
+* Dart, aşağıdaki tabloda gösterilen operatörleri destekler. Tablo, Dart'ın operatör ilişkilerinin bir yaklaşımı olan en yüksekten en düşüğe operatör ilişkisini ve operatör önceliğini gösterir. Bu operatörlerin çoğunu sınıf üyeleri olarak uygulayabilirsiniz .
+
+### Operatör Tablosu
+
+| Tanım | Operatör | Birleşme |
+|------------|----------|---------------|
+| unary postfix | `expr++` `expr--` `()` `[]` `?[]` `.` `?.` `!` | None |
+| unary prefix | `-expr` `!expr` `-expr` `++expr` `--expr` `await expr` | None |
+| multiplicative | `*` `/` `%` `~/` | Left |
+| additive | `+` `-` | Left |
+| shift | `<<` `>>` `>>>` | Left |
+| bitwise AND | `&` | Left |
+| bitwise XOR | `^` | Left |
+| bitwise OR | `\|` | Left |
+| relational and type test | `>=` `>` `<=` `<` `as` `is` `is!` | None |
+| equality | `==` `!=` | None |
+| logical AND | `&&` | Left |
+| logical OR | `\|\|` | Left |
+| if-null | `??` | Left |
+| conditional | `expr1 ? expr2 : expr3` | Right |
+| cascade | `..` `?..` | Left |
+| assignment | `=` `*=` `/=` `+=` `-=` `&=` `^=` etc. | Right |
+| spread | `...` `...?` | None |
+
+
+:::warning
+Önceki tablo yalnızca yardımcı bir kılavuz olarak kullanılmalıdır. Operatör önceliği ve ilişkisellik kavramı, dil gramerinde bulunan gerçeğin bir yaklaşımıdır.
+:::
+
+
+* Operatörleri kullandığınızda ifadeler yaratırsınız. İşte operatör ifadelerinin bazı örnekleri:
+
+```Dart
+a++
+a + b
+a = b
+a == b
+c ? a : b
+a is T
 ```
 
-- Bu satırda:\
-  `var` anahtar kelimesi ile bir değişken tanımlanır.\
-  `name` adlı değişken, "Okuyarak Öğren" adlı bir String objesine referans verir.
+## Operatör önceliği örneği
 
-- Eğer değişken türünü açıkça belirtmek isterseniz, `String` gibi bir tür kullanabilirsiniz:
+* Operatör tablosunda , her operatör onu izleyen satırlardaki operatörlerden daha yüksek önceliğe sahiptir. Örneğin, çarpma operatörü, mantıksal AND operatöründen daha yüksek önceliğe sahip olan %eşitlik operatöründen daha yüksek önceliğe sahiptir (ve dolayısıyla daha önce yürütülür) . Bu öncelik, aşağıdaki iki satır kodun aynı şekilde yürütüldüğü anlamına gelir:`==&&`
 
-```ts
-String name = 'Okuyarak Öğren';
+```Dart
+// Parantezler okunabilirliği artırır.
+if ((n % i == 0) && (d % i == 0)) ...
+
+// Okunması daha zor ama eşdeğer.
+if (n % i == 0 && d % i == 0) ...
 ```
 
-## **2. Tür Çıkarımı (Type Inference)**
+:::warning 
+İki işlenen alan operatörler için, en soldaki işlenen hangi yöntemin kullanılacağını belirler. Örneğin, bir `Vector` nesneniz ve bir `Point` nesneniz varsa, `aVector` + `aPoint` `Vector` toplamasını `(+)` kullanır.
+:::
 
-- Dart, değişken türlerini otomatik olarak anlayabilir. Bu nedenle var kullanıldığında, Dart türü otomatik olarak belirler. Ancak türü açıkça belirtmek isterseniz, ilgili türü yazabilirsiniz.
 
-```ts
-Object name = 5 ;                // name herhangi bir türde değer alabilir.
-String name = 'Okuyarak Öğren';  // name sadece String türünde değer alabilir.
+## Aritmetic operatörler
+
+* Dart, aşağıdaki tabloda gösterildiği gibi, olağan aritmetik operatörleri destekler.
+
+
+* Örnek
+
+```Dart
+assert(2 + 3 == 5);
+assert(2 - 3 == -1);
+assert(2 * 3 == 6);
+assert(5 / 2 == 2.5); // Result is a double
+assert(5 ~/ 2 == 2); // Result is an int
+assert(5 % 2 == 1); // Remainder
+
+assert('5/2 = ${5 ~/ 2} r ${5 % 2}' == '5/2 = 2 r 1');
 ```
 
-## **3. Null Safety (Boş Değere Karşı Güvenlik)**
+:::note
+Dart ayrıca hem prefix hem de postfix artırma ve azaltma operatörlerini destekler.
+:::
 
-- Dart, `null` güvenliği ile çalışır. Bu, bir değişkenin boş (null) değere sahip olmasından kaynaklanan hataları önler.`
 
-### Değişken Türleri ve Null Güvenliği:
+## Artırma ve Azaltma Operatörleri Tablosu
 
-`String?` gibi bir tür, boş değeri (null) alabilir.
-`String` gibi bir tür ise boş olamaz, yani bir başlangıç değeri atanmalıdır.
+| Operatör | Anlam |
+|----------|-------|
+| `++var` | `var = var + 1` (ifade değeri `var + 1`) |
+| `var++` | `var = var + 1` (ifade değeri `var`) |
+| `--var` | `var = var - 1` (ifade değeri `var - 1`) |
+| `var--` | `var = var - 1` (ifade değeri `var`) |
 
-```ts
-String? name;           // Boş olabilir
-String surname = 'Doe'; // Boş olamaz
+### Kullanım Örneği
+
+```dart
+void main() {
+ var a = 5;
+ 
+ print(++a); // Çıktı: 6 (önce artırır, sonra değeri döndürür)
+ print(a);   // Çıktı: 6
+ 
+ var b = 5;
+ print(b++); // Çıktı: 5 (önce değeri döndürür, sonra artırır)
+ print(b);   // Çıktı: 6
+ 
+ var c = 5;
+ print(--c); // Çıktı: 4 (önce azaltır, sonra değeri döndürür)
+ print(c);   // Çıktı: 4
+ 
+ var d = 5;
+ print(d--); // Çıktı: 5 (önce değeri döndürür, sonra azaltır)
+ print(d);   // Çıktı: 4
+}
+```
+## Eşitlik ve ilişkisel operatörler
+
+* Aşağıdaki tabloda eşitlik ve ilişkisel operatörlerin anlamları listelenmiştir.
+
+### Karşılaştırma Operatörleri Tablosu
+
+| Operatör | Anlam |
+|----------|-------|
+| `==` | Eşit; aşağıdaki tartışmaya bakın |
+| `!=` | Eşit değil |
+| `>` | Daha büyük |
+| `<` | Daha az |
+| `>=` | Büyük veya eşit |
+| `<=` | Küçük veya eşit |
+
+### Kullanım Örneği
+
+```dart
+void main() {
+ var a = 5;
+ var b = 3;
+ 
+ print(a == b); // Çıktı: false
+ print(a != b); // Çıktı: true
+ print(a > b);  // Çıktı: true
+ print(a < b);  // Çıktı: false
+ print(a >= b); // Çıktı: true
+ print(a <= b); // Çıktı: false
+}
 ```
 
-### Zorunlu Başlangıç Değeri:
+## Nesne Karşılaştırma ve `==` Operatörü
 
-- Boş olamayacak bir değişkeni mutlaka başlatmanız gerekir:
+İki nesnenin (x ve y) aynı şeyi temsil edip etmediğini test etmek için `==` operatörü kullanılır. (Eğer iki nesnenin tamamen aynı nesne olup olmadığını kontrol etmeniz gereken nadir durumlarda `identical()` fonksiyonunu kullanın.)
 
-```ts
-int number = 13; // Başlangıç değeri zorunlu
+### `==` Operatörü Nasıl Çalışır?
+
+1. Eğer `x` veya `y`'den biri `null` ise:
+   - Her ikisi de `null` ise `true` döner
+   - Sadece biri `null` ise `false` döner
+
+2. Diğer durumlarda, `x` nesnesinin `==` metodunu `y` argümanıyla çağırarak sonucu döndürür.
+
+:::note
+`==` gibi operatörler aslında ilk operandları üzerinde çağrılan metodlardır.
+:::
+
+### Örnek Kullanım
+
+```dart
+void main() {
+  // Eşitlik kontrolü
+  assert(2 == 2);    // true - sayılar eşit
+  assert(2 != 3);    // true - sayılar eşit değil
+  
+  // Büyüklük-küçüklük karşılaştırması
+  assert(3 > 2);     // true - 3, 2'den büyük
+  assert(2 < 3);     // true - 2, 3'ten küçük
+  assert(3 >= 3);    // true - 3, 3'e eşit veya büyük
+  assert(2 <= 3);    // true - 2, 3'ten küçük veya eşit
+  
+  // Null karşılaştırma örnekleri
+  String? a = null;
+  String? b = null;
+  String c = "test";
+  
+  assert(a == b);    // true - iki null değer eşittir
+  assert(a != c);    // true - null ile null olmayan eşit değildir
+}
 ```
 
-## **4. Late Anahtar Kelimesi**
+## Tip Test Operatörleri Tablosu
 
-- `late`, bir değişkenin başlatılmasını daha sonra yapacağınızı belirtir. Dart derleyicisi bu durumu kabul eder.
+| Operatör | Anlam |
+|----------|-------|
+| `as` | Typecast (ayrıca `library prefixes` belirtmek için kullanılır) |
+| `is` | Nesne belirtilen tipe sahipse true döner |
+| `is!` | Nesne belirtilen tipe sahip değilse true döner |
 
-```ts
-late String description;
-description = 'Dart is fun!';
+### Tip Kontrolü ve Runtime'da Type Testing
+
+`as`, `is`, ve `is!` operatörleri, runtime sırasında tip kontrolü yapmak için kullanışlı araçlardır. Bir nesnenin (`obj`) belirli bir tipi (`T`) uygulayıp uygulamadığını kontrol etmek için kullanılırlar.
+
+Örneğin, `obj is Object?` her zaman true değerini döndürür çünkü her nesne `Object`'ten türer.
+
+### `as` Operatörü Kullanımı
+
+`as` operatörünü yalnızca bir nesnenin belirli bir tipte olduğundan kesinlikle eminseniz kullanın.
+
+```dart
+void main() {
+ // DİKKAT: Bu kullanım risklidir
+ (employee as Person).firstName = 'Bob';
+}
+```
+### `is` Operatörü Kullanımı
+
+* Nesnenin tipinden emin değilseniz, nesneyi kullanmadan önce is ile tip kontrolü yapın.
+
+```Dart
+void main() {
+  // DOĞRU YAKLAŞIM: Önce tip kontrolü yap
+  if (employee is Person) {
+    employee.firstName = 'Bob';  // Güvenli kullanım
+  }
+}
+```
+:::warning
+Yukarıdaki iki kod örneği birbirine eşdeğer değildir:
+
+İlk örnekte (as kullanımı), eğer employee null ise veya Person tipinde değilse, program exception fırlatır.
+İkinci örnekte (is kullanımı), eğer koşul sağlanmazsa blok içine girmez ve herhangi bir hata oluşmaz.
+:::
+
+:::tip
+Kullanım Önerileri
+
+Tip dönüşümlerinde öncelikle is ile kontrol yapın
+as operatörünü sadece tipten kesinlikle emin olduğunuz durumlarda kullanın
+Null olabilecek değişkenlerle çalışırken ekstra dikkatli olun
+is! operatörünü bir tipin olmaması durumunu kontrol etmek için kullanın
+:::
+
+```Dart
+void main() {
+  dynamic value = 42;
+  
+  // is kullanımı
+  if (value is int) {
+    print('Bu bir tam sayıdır');
+  }
+  
+  // is! kullanımı
+  if (value is! String) {
+    print('Bu bir string değildir');
+  }
+  
+  // as kullanımı (dikkatli kullanılmalı)
+  try {
+    String text = value as String;  // Runtime hatası!
+  } catch (e) {
+    print('Tip dönüşümü başarısız: $e');
+  }
+}
 ```
 
-<Alert type="warning">
-  Ancak, `late` değişkeni kullanmadan önce başlatmanız gerekir; aksi halde
-  çalışma zamanında hata alırsınız.
-</Alert>
+## Atama operatörleri
 
-## **5. Final ve Const Değişkenler**
+* Daha önce gördüğünüz gibi, `=` operatör kullanarak değerler atayabilirsiniz. Yalnızca atanmış değişken `null` olduğunda atama yapmak için `??=` operatörü kullanın.
 
-- Eğer bir değişkenin değerini değiştirmek istemiyorsanız, final veya const kullanabilirsiniz.
-
-<Alert type="note">Örnek değişkenler final olabilir ancak const olamaz.</Alert>
-
-- Final: Değişken sadece bir kez atanabilir. Değeri çalışma zamanında belirlenir.
-
-```ts
-final name = 'Okuyarak Öğren';
+```Dart
+// a ya bir değer atayın
+a = value;
+// b boşsa b'ye değer ata; aksi takdirde b aynı kalır
+b ??= value;
 ```
 
-- Const: Değeri derleme zamanında sabitlenir ve değiştirilemez.
+* `+=` gibi bileşik atama operatörleri bir işlemi bir atamayla birleştirir.
 
-```ts
-const pi = 3.14;
+## Bileşik Atama (Compound Assignment) Operatörleri
+
+`+=` gibi bileşik atama operatörleri, bir operasyonu atama işlemiyle birleştirir.
+
+### Mevcut Operatörler
+
+| Birinci Grup | İkinci Grup | Üçüncü Grup |
+|--------------|-------------|-------------|
+| `=` `*=` `%=` `>>>=` `^=` | `+=` `/=` `<<=` `&=` `\|=` | `-=` `~/=` `>>=` |
+
+### Operatörlerin Çalışma Mantığı
+
+Bir `op` operatörü için:
+```dart
+a op= b
+```
+* ifadesi, aşağıdaki ile aynı anlama gelir:
+```Dart
+a = a op b
 ```
 
-### final vs const
+### Örnek Açıklama
 
--> **final kullanılacak durumlar**
+* Eğer `+=` operatörünü ele alırsak:
+```Dart
+a += b
+// ifadesi şuna eşdeğerdir:
+a = a + b
+```
 
-1. Çalışma Zamanında Belirlenen Değerler:
+### Pratik Kullanım Örneği
+```Dart
+void main() {
+  // Temel atama operatörü ile değer atama
+  var a = 2;  // = operatörü ile başlangıç değeri atama
+  
+  // Bileşik atama operatörü kullanımı
+  a *= 3;     // Çarpma ve atama: a = a * 3
+  
+  // Sonucu kontrol etme
+  assert(a == 6);  // true, çünkü 2 * 3 = 6
+  
+  // Diğer bileşik atama örnekleri
+  var b = 10;
+  b += 5;     // b = 15 (toplama ve atama)
+  b -= 3;     // b = 12 (çıkarma ve atama)
+  b ~/= 2;    // b = 6  (tam sayı bölme ve atama)
+  b %= 4;     // b = 2  (mod  ve atama)
+}
+```
 
-- Değerin çalışma zamanında belirlendiği ancak sonrasında değiştirilmeyeceği durumlarda final kullanılır.\
-  Örneğin, bir API'den alınan veriler veya kullanıcıdan alınan girişler.
+:::tip 
+1. Bileşik atama operatörleri kod yazımını daha kısa ve okunabilir hale getirir
+2. Her aritmetik veya bitsel operatörün bir bileşik atama karşılığı vardır
+3. Operatörler soldan sağa doğru değerlendirilir
+4. İşlem ve atama tek bir adımda gerçekleşir
+5. Bileşik atama operatörleri özellikle döngülerde ve matematik işlemlerinde kod tekrarını azaltmak için çok kullanışlıdır.
+:::
 
-2. Değerler Dinamik Olarak Atanabilir:
-   Eğer değer çalışma zamanında bir işlem veya hesaplama sonucunda belirlenecekse, final uygun bir tercihtir.
+## Mantıksal operatörler
 
--> **const Kullanılacak Durumlar**
+* Mantıksal operatörleri kullanarak Boole ifadelerini tersine çevirebilir veya birleştirebilirsiniz.
 
-1. Derleme Zamanında Sabitler:
+### Mantıksal Operatörler Tablosu
 
-- Derleme zamanı sabitleri (örn. matematiksel sabitler veya yapılandırma değerleri) için const kullanılır.\
-  Bu, değişkenin her yerde aynı kalmasını garanti eder.
+| Operatör | Anlam |
+|----------|-------|
+| `!expr` | aşağıdaki ifadeyi tersine çevirir (false'ı true'ya, ve tersi) |
+| `||` | mantıksal VEYA |
+| `&&` | mantıksal VE |
 
-2. Sabit Koleksiyonlar:
-   Koleksiyonlar (listeler, haritalar) içindeki tüm öğeler derleme zamanında sabitse, const ile tanımlanabilirler.\
-   Bu, koleksiyonun içeriğinin değişmeyeceğini garanti eder.
+### Kullanım Örneği
+
+```dart
+void main() {
+ bool a = true;
+ bool b = false;
+ 
+ // ! operatörü
+ print(!a);      // Çıktı: false (true'nun tersi)
+ print(!b);      // Çıktı: true  (false'un tersi)
+ 
+ // || operatörü (VEYA)
+ print(a || b);  // Çıktı: true  (en az biri true)
+ print(b || b);  // Çıktı: false (ikisi de false)
+ 
+ // && operatörü (VE)
+ print(a && b);  // Çıktı: false (ikisi birden true değil)
+ print(a && a);  // Çıktı: true  (ikisi de true)
+}
+```
+:::note
+1. ! operatörü tekli (unary) bir operatördür ve sadece boolean değerleri tersine çevirir
+2. || operatöründe ifadelerden birinin true olması yeterlidir
+3. && operatöründe tüm ifadelerin true olması gerekir
+4. && operatörü || operatöründen daha yüksek önceliğe sahiptir
+:::
+
+* Mantıksal operatörler genellikle koşul ifadelerinde ve kontrol akışlarında kullanılır:
+
+```Dart
+if (!isLoading && (isAdmin || hasPermission)) {
+  // İşlemler burada
+}
+```
+
+## Koşullu ifadeler
+
+
+* Dart, if-else ifadelerinin yerine kullanılabilecek iki özel operatör sunar:
+
+### 1. Koşul (Ternary) Operatörü: `condition ? expr1 : expr2`
+
+```dart
+if ? ifade1 : ifade2
+```
+* Eğer koşul true ise, ifade1 değerlendirilir ve sonucu döndürülür
+* Eğer koşul false ise, ifade2 değerlendirilir ve sonucu döndürülür
+
+```Dart
+void main() {
+  var isPublic = true;
+  var visibility = isPublic ? 'public' : 'private';
+  print(visibility); // Çıktı: 'public'
+}
+```
+
+### Null-Coalescing (If-Null) Operatörü: expr1 ?? expr2
+
+```
+ifade1 ?? ifade2
+```
+
+* Eğer ifade1 null değilse, değeri döndürülür
+* Eğer ifade1 null ise, ifade2 değerlendirilir ve sonucu döndürülür
+
+```Dart
+void main() {
+  String? name;
+  print(name ?? 'Misafir'); // Çıktı: 'Misafir'
+  
+  name = 'Ahmet';
+  print(name ?? 'Misafir'); // Çıktı: 'Ahmet'
+}
+```
+
+:::note
+1. ?? operatörü özellikle null kontrolü gerektiren durumlarda kodu daha okunabilir hale getirir
+2. Ternary operatör (?:) basit if-else ifadelerini tek satırda yazmamızı sağlar
+3. Her iki operatör de kodun daha kısa ve öz olmasını sağlar
+4. Bu operatörler iç içe kullanılabilir, ancak okunabilirlik için dikkatli olunmalıdır
+:::
+
+:::warning
+İç içe fazla koşul operatörü kullanmak kodun okunabilirliğini azaltabilir. Böyle durumlarda klasik if-else yapısını tercih etmek daha iyi olabilir.
+:::
+
+## Quiz
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu kod çalıştığında çıktı ne olur?
+```
+int a = 5;
+print(a++);
+print(a);
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+```
+5
+6
+// Çünkü a++ postfix operatörü önce mevcut değeri kullanır, sonra artırır.
+```
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu kod çalıştığında result değişkeninin değeri ne olur?
+```
+String? name;
+String result = name ?? 'Misafir';
+print(result);
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+```
+//'Misafir'
+// Çünkü ?? operatörü, sol taraftaki değer null ise sağ taraftaki değeri kullanır.
+```
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu kod çalıştığında çıktı ne olur?
+```
+int x = 10;
+int y = 3;
+print(x ~/ y);
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+```
+3
+// Çünkü ~/ operatörü tam sayı bölme işlemi yapar ve sadece tam kısmı alır.
+```
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu kod çalıştığında a'nın son değeri ne olur?
+```
+int a = 5;
+a *= 3;
+a += 2;
+print(a);
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+```
+17
+//Çünkü önce a'yı 3 ile çarpıp (15), sonra 2 ekliyor (17).
+```
+<br/>
+</TabItem> 
+</TabbedContent> 
+
+<TabbedContent code >
+<TabItem value="Soru"> 
+<br/>
+Bu kod çalıştığında a'nın son değeri ne olur?
+```
+int age = 20;
+String result = age > 18 ? "Yetişkin" : "Çocuk";
+print(result);
+```
+<br/>
+</TabItem> 
+
+<TabItem value="Cevap"> 
+<br/>
+```
+//"Yetişkin"
+//Çünkü ternary operatörde koşul doğru olduğu için (age > 18) ilk değer seçilir.
+```
+<br/>
+</TabItem> 
+</TabbedContent> 
