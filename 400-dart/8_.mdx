@@ -1,0 +1,178 @@
+---
+
+title: ""
+metaTitle: "Getting started with Prisma Pulse"
+metaDescription: "Learn how to get up and running with Prisma Pulse."
+sidebar_label: "Koleksiyonlar"
+tocDepth: 4
+toc: true
+
+---
+
+## Listeler
+
+* Lists, sıralı nesne gruplarını temsil eden ve dizilere benzeyen yapılardır.
+
+### Temel Liste Oluşturma
+
+```
+// Basit bir liste
+var list = [1, 2, 3];
+
+// Type inference ile liste oluşturma
+// Dart otomatik olarak List<int> olarak algılar
+var sayilar = [1, 2, 3];
+List<String> kelimeler = ['elma', 'armut', 'kiraz'];
+
+// Trailing comma kullanımı - kod düzenini korur
+var meyveler = [
+  'elma',
+  'armut',
+  'kiraz',  // Son virgül kopyala-yapıştır hatalarını önler
+];
+```
+
+### Liste İşlemleri
+
+```
+var liste = [1, 2, 3, 4, 5];
+
+// Temel işlemler
+print(liste.length);     // Uzunluk: 5
+print(liste.first);      // İlk eleman: 1
+print(liste.last);       // Son eleman: 5
+print(liste.isEmpty);    // Boş mu: false
+print(liste.isNotEmpty); // Dolu mu: true
+
+// Elemanlara erişim ve değiştirme
+liste[0] = 10;          // İlk elemanı değiştir
+var ikinci = liste[1];  // İkinci elemanı al
+
+// Liste metodları
+liste.add(6);           // Eleman ekleme
+liste.addAll([7, 8]);   // Çoklu eleman ekleme
+liste.remove(3);        // Eleman silme
+liste.clear();          // Tüm elemanları silme
+```
+
+### Sabit Listeler
+
+```
+final sabitListe = const [1, 2, 3];
+// sabitListe[1] = 1;  // HATA: Sabit liste değiştirilemez
+```
+
+## Sets
+
+* Set, her elemandan sadece bir tane bulunduran sırasız koleksiyonlardır.
+
+### Set Oluşturma
+
+```
+// Literal ile set oluşturma
+var elementler = {'hidrojen', 'helyum', 'lityum'};
+
+// Boş set oluşturma yöntemleri
+var bos1 = <String>{};              // Tercih edilen yöntem
+Set<String> bos2 = {};             // Alternatif yöntem
+// var bos3 = {};                  // DİKKAT: Bu bir Map oluşturur!
+
+// Type inference ile set
+var sayilarSeti = {1, 2, 3};       // Set<int>
+```
+
+### Set İşlemleri
+
+```
+var kimyasallar = {'hidrojen', 'helyum'};
+
+// Temel işlemler
+kimyasallar.add('lityum');         // Tekil eleman ekleme
+kimyasallar.addAll({'bor', 'karbon'}); // Çoklu eleman ekleme
+
+// Set özellikleri
+print(kimyasallar.length);         // Eleman sayısı
+print(kimyasallar.contains('bor')); // Eleman kontrolü
+print(kimyasallar.containsAll({'hidrojen', 'helyum'})); // Alt küme kontrolü
+
+// Küme işlemleri
+var set1 = {1, 2, 3};
+var set2 = {3, 4, 5};
+print(set1.union(set2));           // Birleşim: {1, 2, 3, 4, 5}
+print(set1.intersection(set2));     // Kesişim: {3}
+print(set1.difference(set2));       // Fark: {1, 2}
+```
+
+## Maps
+
+* Map, anahtar-değer çiftlerini saklayan ve her anahtarın benzersiz olduğu koleksiyonlardır
+
+### Map Oluşturma
+
+```
+// Literal ile map oluşturma
+var ulkeler = {
+  'TR': 'Türkiye',
+  'US': 'Amerika',
+  'DE': 'Almanya',
+};
+
+// Constructor ile oluşturma
+var notlar = Map<String, int>();
+notlar['Matematik'] = 90;
+notlar['Fizik'] = 85;
+
+// Type inference ile map
+var puanlar = {
+  'Ali': 85,
+  'Ayşe': 90,
+  'Mehmet': 95,
+}; // Map<String, int>
+```
+
+### Map İşlemleri
+
+```
+var ogrenciler = {'Ali': 85, 'Ayşe': 90};
+
+// Temel işlemler
+print(ogrenciler['Ali']);         // Değer okuma: 85
+ogrenciler['Mehmet'] = 95;        // Yeni çift ekleme
+ogrenciler.remove('Ali');         // Çift silme
+
+// Map özellikleri
+print(ogrenciler.keys);           // Tüm anahtarlar
+print(ogrenciler.values);         // Tüm değerler
+print(ogrenciler.length);         // Çift sayısı
+print(ogrenciler.isEmpty);        // Boş mu kontrolü
+
+// Güvenli erişim
+var puan = ogrenciler['Can'] ?? 0;  // Olmayan anahtar için varsayılan değer
+```
+
+## Önemli Notlar
+
+1. **Liste Kullanımı:**
+
+* Sıralı veri için List kullanın
+* Index ile hızlı erişim gerektiğinde tercih edin
+* Sabit boyutlu veriler için fixed-length list düşünün
+
+2. **Set Kullanımı:**
+
+* Benzersiz elemanlar gerektiğinde kullanın
+* Küme işlemleri yapacaksanız tercih edin
+* Eleman varlığı kontrolü sık yapılacaksa kullanın
+
+3. **Map Kullanımı:**
+
+* Anahtar-değer ilişkisi varsa kullanın
+* Anahtarların benzersiz olması gerektiğini unutmayın
+* Büyük veri setlerinde hızlı arama için tercih edin
+
+
+4. **Performans İpuçları:**
+
+* Sabit koleksiyonlar için const kullanın
+* Büyük koleksiyonlarda gereksiz kopyalamadan kaçının
+* Uygun koleksiyon tipini seçerek performansı optimize edin
