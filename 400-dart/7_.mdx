@@ -1,0 +1,113 @@
+---
+
+title: ""
+metaTitle: "Getting started with Prisma Pulse"
+metaDescription: "Learn how to get up and running with Prisma Pulse."
+sidebar_label: "Built-in-types"
+tocDepth: 4
+toc: true
+
+---
+
+
+## Genel Bakış
+
+Dart dilinde özel olarak desteklenen tipler şunlardır:
+
+* Numbers (int, double)
+* Strings (String)
+* Booleans (bool)
+* Records ((value1, value2))
+* Functions (Function)
+* Lists (List, diziler olarak da bilinir)
+* Sets (Set)
+* Maps (Map)
+* Runes (Runes; genellikle characters API ile değiştirilir)
+* Symbols (Symbol)
+* Null değeri (Null)
+
+## Numbers (Sayılar)
+
+* Dart'ta iki tür sayı vardır:
+1. **int**
+* 64-bit'ten büyük olmayan tam sayı değerleri
+* Native platformlarda: -2^63 ile 2^63 - 1 arası
+* Web'de: -2^53 ile 2^53 - 1 arası (JavaScript sayıları)
+
+2. **double**
+
+* 64-bit (double-precision) ondalıklı sayılar
+* IEEE 754 standardına uygun
+
+```
+// Integer örnekleri
+var x = 1;
+var hex = 0xDEADBEEF;
+
+// Double örnekleri
+var y = 1.1;
+var exponents = 1.42e5;
+
+// Sayı dönüşümleri
+String -> int:
+var one = int.parse('1');
+
+String -> double:
+var onePointOne = double.parse('1.1');
+
+int -> String:
+String oneAsString = 1.toString();
+
+double -> String:
+String piAsString = 3.14159.toStringAsFixed(2);
+```
+
+## Strings
+* Dart string'leri UTF-16 code units dizisi tutar:
+
+````
+var s1 = 'Tek tırnak kullanabilirsiniz';
+var s2 = "Çift tırnak da kullanabilirsiniz";
+
+// String interpolation
+var name = 'Dart';
+print('Merhaba $name'); // Değişken kullanımı
+print('Merhaba ${name.toUpperCase()}'); // İfade kullanımı
+
+// Çok satırlı stringler
+var multiLine = '''
+Bu çok
+satırlı bir
+string örneğidir.
+''';
+
+// Raw string
+var rawString = r'Raw string içinde \n bile özel karakter sayılmaz';
+````
+
+## Booleans
+* Dart'ta boolean değerler için bool tipi kullanılır:
+```
+// Sadece true ve false değerlerini alabilir
+var dogru = true;
+var yanlis = false;
+
+// Boolean kontrol örnekleri
+var metin = '';
+assert(metin.isEmpty); // Boş string kontrolü
+
+var puan = 0;
+assert(puan == 0); // Sıfır kontrolü
+
+var deger = null;
+assert(deger == null); // Null kontrolü
+```
+
+## Önemli Notlar:
+
+* Her değişken bir nesneye (class instance) referanstır
+* Sayı literalleri compile-time sabitleridir
+* String'lerde hem tek hem çift tırnak kullanılabilir
+* Boolean değerler için açık kontroller yapılmalıdır
+* Tip dönüşümleri için özel metodlar mevcuttur
+* String interpolation için $ ve ${} kullanılır
