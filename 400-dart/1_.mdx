@@ -1,210 +1,274 @@
 ---
-title: ""
-metaTitle: "Getting started with Prisma Pulse"
-metaDescription: "Learn how to get up and running with Prisma Pulse."
-sidebar_label: "Değişkenler"
-tocDepth: 4
-toc: true
+title: "İndirme ve Kurma"
+layout: "okuyarakogren-content"
+topic: "İndirme ve Kurma"
+description: "Bu derste Dart hakkında genel bir bilgilendirme yapılmaktadır."
+slug: dart/1_
+prev_page: /dart/0_
+prev_title: "Dart'a Giriş"
+next_page: /dart/2_
+next_title: "Operatörler"
+git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/1_.mdx
+pageType: "dart"
 ---
 
-import {
-  Bolt,
-  BorderBox,
-  BoxTitle,
-  Inspect,
-  Database,
-  Grid,
-  LinkCard,
-  List,
-  SignalStream,
-  SquareLogo,
-} from '@site/src/components/GettingStarted';
+<BoxTitle>İndirme ve Kurma</BoxTitle>
 
-<BorderBox>
-<BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
-<span style={{ fontSize: '24px' }}>
-Şimdi kodlama dünyasının temel taşlarından birine adım atıyoruz: \
-Değişkenler (Variables)!
-Değişkenler, programların hafızası gibidir; bilgileri saklar, taşır ve gerektiğinde senin için işleme alır. 
+<Box>
+  <BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
+  <ParagraphHighlight>
+    Dart dünyasına adım atmaya hazır mısın? Bu yolculukta seni hızlı ve eğlenceli bir başlangıç
+    bekliyor. Dart, seni mobil, web ve daha fazlasıyla buluşturacak güce sahip. Hazırsan klavyene
+    sıkıca tutun, çünkü şimdi Dart’ı nasıl kuracağını öğreniyoruz! 🚀
+  </ParagraphHighlight>
+</Box>
 
-Bir sihirli kutu düşün: İçine bir sayı, bir isim ya da bir kelime koyabilirsin. İşte değişkenler tam da böyle çalışır! Kodunun enerjisi ve zekası buradan gelir. Hazır mısın? Değişkenlerin büyülü dünyasına dalıyoruz! 🚀
-</span>
-</BorderBox>
+<Alert type="tip">
+  Eğer Flutter SDK'sını kurduysanız veya kurmayı planlıyorsanız, Flutter SDK'sı zaten Dart SDK'sının
+  tamamını içerir. Bu nedenle, Dart programlama dilini kullanmak için Dart'ı ayrıca kurmanıza gerek
+  yoktur.
+</Alert>
 
-## **1. Değişken Tanımlama ve Başlatma**
+## Sistem Gereksinimleri
 
-```ts
-var name = 'Okuyarak Öğren';
-```
+<br />
 
-* Bu satırda:\
-``var`` anahtar kelimesi ile bir değişken tanımlanır.
-``name`` adlı değişken, "Okuyarak Öğren" adlı bir String objesine referans verir.
+| Platform | x64 | IA32 (x86) | Arm32 | Arm64 | RISC-V (RV64GC) | OS Versions                                                          |
+| -------- | :-: | :--------: | :---: | :---: | :-------------: | -------------------------------------------------------------------- |
+| Windows  | ✅  |     ⚠️     |  ❌   |  ✅   |       ⚪️       | 10, 11                                                               |
+| Linux    | ✅  |     ⚠️     |  ✅   |  ✅   |       ✅        | Debian stable&#10;Ubuntu LTS                                         |
+| macOS    | ✅  |     ❌     |  ⚪️  |  ✅   |       ⚪️       | macOS'un son üç sürümü:&#10;Sonoma (14), Ventura (13), Monterey (12) |
 
-* Eğer değişken türünü açıkça belirtmek isterseniz, ``String`` gibi bir tür kullanabilirsiniz:
+✅ Tüm kanallarda desteklenir.<br/>
+⚠️ Destek kalktı ve gelecekteki bir Dart sürümünde tamamen kaldırılabilir.<br/>
+❌ Tüm kanallarda desteklenmez.<br/>
+⚪️ İşletim sistemi tarafından desteklenmez.
 
-```ts
-String name = 'Okuyarak Öğren';
-```
-
-## **2. Type Inference (Tür Çıkarımı)**
-
-* Dart, değişken türlerini otomatik olarak anlayabilir. Bu nedenle var kullanıldığında, Dart türü otomatik olarak belirler. Ancak türü açıkça belirtmek isterseniz, ilgili türü yazabilirsiniz.
-
-```ts
-Object name = 5 ;                // name herhangi bir türde değer alabilir.
-String name = 'Okuyarak Öğren';  // name sadece String türünde değer alabilir.
-```
-
-## **3. Null Safety (Boş Değere Karşı Güvenlik)**
-
-* Dart, ``null`` güvenliği ile çalışır. Bu, bir değişkenin boş (null) değere sahip olmasından kaynaklanan hataları önler.`
-
-### Değişken Türleri ve Null Güvenliği:
-
-``String?`` gibi bir tür, boş değeri (null) alabilir.
-``String`` gibi bir tür ise boş olamaz, yani bir başlangıç değeri atanmalıdır.
-
-```ts
-String? name;           // Boş olabilir
-String surname = 'Doe'; // Boş olamaz
-```
-
-### Zorunlu Başlangıç Değeri:
-
-* Boş olamayacak bir değişkeni mutlaka başlatmanız gerekir:
-
-```ts
-int number = 13; // Başlangıç değeri zorunlu
-```
-
-## **4. Late Anahtar Kelimesi**
-
-* ``late``, bir değişkenin başlatılmasını daha sonra yapacağınızı belirtir. Dart derleyicisi bu durumu kabul eder.
-
-```ts
-late String description;
-description = 'Dart is fun!';
-```
-
-:::warning
-Ancak, ``late`` değişkeni kullanmadan önce başlatmanız gerekir; aksi halde çalışma zamanında hata alırsınız.
-:::
-
-## **5. Final ve Const Değişkenler**
-
-* Eğer bir değişkenin değerini değiştirmek istemiyorsanız, final veya const kullanabilirsiniz.
-
-:::note
-Örnek değişkenler final olabilir ancak const olamaz.
-:::
-
-* Final: Değişken sadece bir kez atanabilir. Değeri çalışma zamanında belirlenir.
-
-```ts
-final name = 'Okuyarak Öğren';
-```
-
-* Const: Değeri derleme zamanında sabitlenir ve değiştirilemez.
-
-```ts
-const pi = 3.14;
-```
-
-### final vs const
-
--> **final kullanılacak durumlar**
-
-1. Çalışma Zamanında Belirlenen Değerler:
-*   Değerin çalışma zamanında belirlendiği ancak sonrasında değiştirilmeyeceği durumlarda final kullanılır.\
-Örneğin, bir API'den alınan veriler veya kullanıcıdan alınan girişler.
-
-2. Değerler Dinamik Olarak Atanabilir:
-Eğer değer çalışma zamanında bir işlem veya hesaplama sonucunda belirlenecekse, final uygun bir tercihtir.
-
--> **const Kullanılacak Durumlar**
-
-1. Derleme Zamanında Sabitler:
-* Derleme zamanı sabitleri (örn. matematiksel sabitler veya yapılandırma değerleri) için const kullanılır.\
-Bu, değişkenin her yerde aynı kalmasını garanti eder.
-
-2. Sabit Koleksiyonlar:
-Koleksiyonlar (listeler, haritalar) içindeki tüm öğeler derleme zamanında sabitse, const ile tanımlanabilirler.\
-Bu, koleksiyonun içeriğinin değişmeyeceğini garanti eder.
-
-## Quiz
-
+<br />
+## Dart ı nasıl indirebilirim
+<br />
 
 <TabbedContent code >
-<TabItem value="Soru"> 
+<TabItem value="Windows"> 
+## Chocolatey kullanarak kurulum
 <br/>
-Dart dilinde bir değişkeni null değer alabilir şekilde nasıl tanımlarsınız?
-<br/>
-</TabItem> 
+* Dart SDK'yı yüklemek için [Chocolatey](https://chocolatey.org/) kullanın. Chocolatey [yükseltilmiş izinler](https://www.thewindowsclub.com/elevated-privileges-windows) gerektirir.
 
-<TabItem value="Cevap"> 
-<br/>
-`String? name;` şeklinde değişken türünden sonra `?` işareti koyarak tanımlarız.
-<br/>
-</TabItem> 
-</TabbedContent> 
+1. Chocolatey'i kurun.
+2. PowerShell'i yükseltilmiş izinlerle başlatın.
 
+```
+PS C:\> choco install dart-sdk
+```
 
-<TabbedContent code >
-<TabItem value="Soru"> 
-<br/>
-final ve const arasındaki temel fark nedir?
-<br/>
-</TabItem> 
+<br />
+## Varsayılan kurulum yolunu değiştir
+<br />
+* Varsayılan olarak, Chocolatey SDK'yı `C:\tools\dart-sdk` konumuna yükler. Bu konumu değiştirmek için
+[ChocolateyToolsLocation](https://stackoverflow.com/questions/19752533/how-do-i-set-chocolatey-to-install-applications-onto-another-drive/68314437#68314437)
+ortam değişkenini istediğiniz kurulum dizinine ayarlayın.
+<br />
+## PATH'inizin Dart'ı içerdiğini doğrulayın
+<br />
 
-<TabItem value="Cevap"> 
-<br/>
-final değişkenler çalışma zamanında (runtime) bir kez değer alabilirken, const değişkenler derleme zamanında (compile time) değer alır ve değerleri sabittir.
-<br/>
-</TabItem> 
-</TabbedContent> 
+- Dart'ı çalıştırabildiğinizi doğrulayın.
 
-<TabbedContent code >
-<TabItem value="Soru"> 
-<br/>
-Dart'ta tür belirtmeden bir değişken nasıl tanımlanır ve buna ne ad verilir?
-<br/>
-</TabItem> 
+```PowerShell
+PS dart --version
+Dart SDK version: 3.2.4 (stable) (Thu Dec 21 19:13:53 2023 +0000) on "win_x64"
+```
 
-<TabItem value="Cevap"> 
-<br/>
- var anahtar kelimesi kullanılarak tanımlanır (örn: var name = 'Okuyarak Öğren';) ve buna Type Inference (Tür Çıkarımı) denir.
-<br/>
-</TabItem> 
-</TabbedContent> 
-<TabbedContent code >
-<TabItem value="Soru"> 
-<br/>
-late anahtar kelimesinin kullanım amacı nedir?
-<br/>
-</TabItem> 
+<br />
 
-<TabItem value="Cevap"> 
-<br/>
-late, bir değişkenin değerinin daha sonra atanacağını belirtir. Ancak değişken kullanılmadan önce mutlaka değer atanmalıdır, aksi halde çalışma zamanında hata alınır.
-<br/>
-</TabItem> 
-</TabbedContent> 
+- Geliştirme makineniz bir Dart sürümü döndürmüyorsa, SDK konumunu PATH'inize ekleyin:
 
-<TabbedContent code >
-<TabItem value="Soru"> 
+1. Windows arama kutusuna `env` yazın.
+2. `Sistem ortam değişkenlerini düzenle`'ye tıklayın.
+3. `Ortam Değişkenleri`'ne tıklayın....
+4. Kullanıcı değişkeni bölümünde `Yol`'u seçin ve `Düzenle`'ye tıklayın....
+5. `Yeni`'ye tıklayın ve dart-sdk dizinine giden yolu girin.
+6. Az önce açtığınız her pencerede, kapatmak ve yol değişikliğini uygulamak için `Uygula` veya `Tamam`'a tıklayın.
+
+## Chocolatey kullanarak yükseltme
+
+<br />
+
+- Dart SDK'yı yükseltmek için aşağıdaki komutu kullanın.
+
+```PowerShell
+PS choco upgrade dart-sdk
+```
+
+<br />
+## Chocolatey kullanarak kaldır
+<br />
+
+- Dart SDK'yı kaldırmak için aşağıdaki adımları izleyin.
+
+1. PowerShell'i yükseltilmiş izinlerle başlatın.
+2. Aşağıdaki komutu kullanın.
+
+```PowerShell
+PS choco uninstall dart-sdk
+```
+
+<br />
+3. Dart yapılandırma dosyalarını ana dizininizden kaldırın.{" "}
+
+`PowerShell PS Remove-Item -Recurse -Force ^ -Path $env:LOCALAPPDATA\.dartServer,$env:APPDATA\.dart,$env:APPDATA\.dart-tool `
+
+</TabItem>
+
+<TabItem value="Linux">
+  ## Linux paket yöneticisini kullanarak kurulum yapın
+  <br />
+  * Dart SDK'yı Ubuntu veya Debian'a kurmak için iki seçeneğiniz var: 1. `apt-get` komutunu kullanın
+  . 2. `.deb` paketi indirin ve `dpkg` komutu çalıştırın.
+  <br />
+  ## `apt-get` Paket yöneticisini kullanarak kurulum yapın
+  <br />
+  * Dart'ı `apt-get` ile kurmak için aşağıdaki adımları uygulayın.
+  <br />
+  1. Paket dizin dosyalarını güncelleyin ve güvenli HTTP paketini yükleyin. ```PowerShell sudo
+  apt-get update && sudo apt-get install apt-transport-https ```
+  <br />
+  2. Google Linux GPG genel anahtarını indirin ve ekleyin. ``` wget -qO-
+  https://dl-ssl.google.com/linux/linux_signing_key.pub \ | sudo gpg --dearmor -o
+  /usr/share/keyrings/dart.gpg ```
+  <br />
+  3. Dart paket deposunu Linux sisteminize ekleyin. ```PowerShell echo 'deb
+  [signed-by=/usr/share/keyrings/dart.gpg arch=amd64]
+  https://storage.googleapis.com/download.dartlang.org/linux/debian stable main' \ | sudo tee
+  /etc/apt/sources.list.d/dart_stable.list ```
+  <br />
+  4. Aşağıdaki sudo apt-get komutlarını kullanın. ```PowerShell sudo apt-get update && sudo apt-get
+  install dart ```
+  <br />
+  ## Debian paketi olarak kurun
+  <br />
+  * Dart SDK'yı Debian paketi `(*.deb)` olarak yüklemek için aşağıdaki adımları uygulayın. 1. Dart
+  SDK
+  [Debian](https://storage.googleapis.com/dart-archive/channels/stable/release/latest/linux_packages/dart_3.6.0-1_amd64.deb)
+  paketini indirin. 2. `*.deb` paketini yüklemek için `sudo dpkg` komutunu kullanın. ```PowerShell
+  sudo dpkg -i dart_3.4.0-1_amd64.deb ```
+  <br />
+  dart_3.4.0-1_amd64.deb dosyasını geçerli dosya adıyla değiştirin.
+  <br />
+  ## Dart SDK'sını yükseltin
+  <br />
+  * SDK'yi kurmak için kullandığınız komutun aynısını kullanın. ### `apt-get` kullanarak yükseltme *
+  Dart SDK'yı apt-get ile yüklediyseniz, aşağıdaki sudo apt-get komutlarını kullanın. ```PowerShell
+  sudo apt-get update && sudo apt-get install dart ```
+  <br />
+  ### dpkg kullanarak yükseltme
+  <br />
+  * Dart SDK'yı `dpkg` ile yüklediyseniz `sudo dpkg` komutunu kullanın. ```PowerShell sudo dpkg -i
+  dart_3.2.6-1_amd64.deb ``` dart_3.4.0-1_amd64.deb dosyasını yeni yükseltmenin dosya adıyla
+  değiştirin.
+  <br />
+  ## Dart SDK'yi kaldırın
+  <br />
+  ### `apt-get` kullanarak kaldır
+  <br />
+  * Dart SDK'yı `apt-get` ile yüklediyseniz, `sudo apt-get remove` komutunu kullanın.
+  <br />
+  1. sudo apt-get remove komutunu kullanın.
+  <br />
+  ```PowerShell sudo apt-get remove -y dart ```
+  <br />
+  2. Dart yapılandırma dosyalarını ana dizininizden kaldırın.
+  <br />
+  ```PowerShell rm -rf ~/.dart* ```
+  <br />
+  ### `dpkg` kullanarak kaldır
+  <br />
+  * Dart SDK'yı `dpkg` ile yüklediyseniz `sudo dpkg --purge` komutunu kullanın.
+  <br />
+  1. `sudo dpkg --purge` komutunu kullanın.
+  <br />
+  ```PowerShell sudo dpkg --purge dart ``` Bu işlem aynı zamanda yapılandırma dosyalarını da
+  kaldırır.
+  <br />
+  2. SDK'nın kaldırıldığını doğrulayın
+  <br />
+  ```PowerShell dpkg -l | grep dart ```
+</TabItem>{" "}
+
+<TabItem value="macOS"> 
+## Homebrew kullanarak kurulum
 <br/>
-Aşağıdaki kod neden hatalıdır?
-```Dart
-String name;
-print(name);
+### Dart SDK'yı kurmak için [Homebrew](https://brew.sh/)'u kullanın.
+<br/>
+1. Gerekirse Homebrew'u yükleyin.
+2. [official tap](https://github.com/dart-lang/homebrew-dart) i ekleyin.
+<br/>
+```
+brew tap dart-lang/dart
 ```
 <br/>
-</TabItem> 
+3. Dart SDK’yı yükleyin.
+<br/>
+```
+brew install dart
+```
+<br/>
+## PATH'in Homebrew'u içerdiğini doğrulayın
+<br/>
+* PATH'inizin **Homebrew** bin dizinini içerdiğini doğrulayın. `Dart run` ve `dart format` gibi Dart SDK komutlarını kullanarak doğru yolu ayarlamak basitleşir.
+<br/>
+* PATH'inizi yapılandırma konusunda yardım almak için [Homebrew SSS](https://docs.brew.sh/FAQ#my-mac-apps-dont-find-homebrew-utilities)'ye bakın.
+<br/>
+## Homebrew kullanarak yükseltme
+<br/>
+* Dart'ın yeni bir sürümü çıktığında güncelleme yapmak için:
+<br/>
+```
+brew upgrade dart
+```
+<br/>
+## Dart sürümlerini değiştir
+<br/>
+* Yerel olarak yüklenen Dart sürümleri arasında geçiş yapmak için:
+<br/>
+1. Geçmek istediğiniz sürümü yükleyin.
+  - Örneğin Dart 3.1'i yüklemek için:
+<br/>
+```
+brew install dart@3.1
+```
+<br/>
+2. Sürümler arasında geçiş yapmak için geçerli sürümü bağlantısını kaldırın ve istediğiniz sürümü bağlayın.
+<br/>
+```
+brew unlink dart@<old> \
+  && brew unlink dart@<new> \
+  && brew link dart@<new>
+```
+<br/>
+## Kurulu Dart sürümlerini listele
+<br/>
+* Hangi Dart sürümlerini yüklediğinizi görmek için:
+<br/>
+```
+brew info dart
+```
+<br/>
+## Homebrew kullanarak kaldırma
+<br/>
+* Dart SDK'yı kaldırmak için [Homebrew](https://brew.sh/)'u kullanın.
+<br/>
+1. Dart SDK'yı kaldırın.
+<br/>
+```
+brew uninstall dart
+```
+<br/>
+2. Dart yapılandırma dosyalarını ana dizininizden kaldırın.
+<br/>
+```
+rm -rf  ~/.dart*
+```
 
-<TabItem value="Cevap"> 
-<br/>
-Çünkü Dart'ın null safety özelliği gereği, String türündeki değişkenler (? olmadan tanımlandığında) null değer alamaz ve mutlaka başlangıç değeri atanmalıdır.
-<br/>
-</TabItem> 
-</TabbedContent> 
+</TabItem>
+
+</TabbedContent>

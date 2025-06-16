@@ -1,14 +1,16 @@
 ---
-
-title: ""
-metaTitle: "Getting started with Prisma Pulse"
-metaDescription: "Learn how to get up and running with Prisma Pulse."
-sidebar_label: "Metadata"
-tocDepth: 4
-toc: true
-
+title: "Yorum Satırları"
+layout: "okuyarakogren-content"
+topic: "Yorum Satırları"
+description: "Bu derste oparatör hakkında genel bir bilgilendirme yapılmaktadır."
+slug: dart/4_
+prev_page: /dart/3_
+prev_title: "Operatörler"
+next_title: "Metadata"
+next_page: /dart/5_
+git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/4_.mdx
+pageType: "dart"
 ---
-
 
 import {
   Bolt,
@@ -26,169 +28,212 @@ import {
 <BorderBox>
 <BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
 <span style={{ fontSize: '24px' }}>
- Kodunuza süper güçler kazandırmaya hazır mısınız?\
- İşte karşınızda Metadata!
- Bu küçük `@` işaretli süper kahramanlar, kodunuza ekstra bilgiler ekler,
- özel yetenekler kazandırır ve onu daha akıllı hale getirir.\
- Bir süper kahraman gibi kodunuzu güçlendirecek, bir etiketleyici gibi
- organize edecek ve bir büyücü gibi özel yetenekler katacaksınız.\
- Metadata büyüsü başlasın! ✨
+Kodun sessiz kahramanlarıyla yorum satırlarıyla tanışmaya hazır mısın?\
+Onlar kodunuzun gizli günlükçüleri, gelecekteki siz için bıraktığınız notlarve ekip arkadaşlarınız için yazdığınız mektuplar gibidir!\
+Bir dedektif gibi kodu aydınlatmak, bir öğretmen gibi açıklamak veya
+bir hikaye anlatıcısı gibi kodunuzu belgelemek için buradalar.\
+Hadi, kodunuza biraz renk katalım! 📝✨
 </span>
 </BorderBox>
 
-* Kodunuz hakkında ek bilgi vermek için meta verileri kullanın. Bir meta veri açıklaması `@` karakteriyle başlar ve bunu derleme zamanı sabitine (örneğin deprecated) bir başvuru veya sabit oluşturucuya bir çağrı izler.
 
-* Tüm Dart kodlarında dört açıklama mevcuttur: `@Deprecated`, `@deprecated`, `@override` ve `@pragma`. `@override` kullanımına ilişkin örnekler için bkz. Bir sınıfı genişletme. İşte `@Deprecated` açıklamasının kullanımına ilişkin bir örnek:
+## Tek satırlık yorumlar
 
-```
-class Television {
-  /// Bunun yerine gücü açmak için [turnOn]'u kullanın.
-  @Deprecated('Use turnOn instead')
-  void activate() {
-    turnOn();
-  }
+* Tek satırlık bir yorum `//` ile başlar.
+* `//` ile satır sonu arasındaki her şey Dart derleyicisi tarafından yok sayılır.
 
-  /// Televizyonun gücünü açar.
-  void turnOn() {...}
-  // ···
+```Dart
+void main() {
+  // Okuyarak Öğren
+  print('Hello World!');
 }
 ```
 
-* Bir mesaj belirtmek istemiyorsanız `@deprecated` kullanabilirsiniz. Ancak, her zaman `@Deprecated` ile bir mesaj belirtmenizi öneririz.
+## Çok satırlı yorumlar
 
-* Kendi meta veri açıklamalarınızı tanımlayabilirsiniz. İşte iki argüman alan bir `@Todo` açıklaması tanımlamanın bir örneği:
+* Çok satırlı bir yorum `/*` ile başlar ve `*/` ile biter . `/*` ve `*/` arasındaki her şey Dart derleyicisi tarafından yok sayılır. Çok satırlı yorumlar iç içe geçebilir.
 
 ```
-class Todo {
-  final String who;
-  final String what;
-
-  const Todo(this.who, this.what);
+void main() {
+/* 
+  Bu bir çoklu yorum satırıdır.
+  İstediğiniz kadar satır ekleyebilirsiniz!
+  Dart bunu görmezden gelecektir 
+*/
 }
 ```
 
-* Ve işte `@Todo` ek açıklamasının kullanımına dair bir örnek:
+## Belgeleme yorumları
+
+* Documentation comments, Dart'ta kod dokümantasyonu oluşturmak için kullanılan özel yorum satırlarıdır. Bu yorumlar, dart doc aracı tarafından otomatik olarak işlenerek güzel bir API dokümantasyonuna dönüştürülür.
+
+* Documentation comments iki şekilde yazılabilir:
+    - Tek satırlı format: ///
+    - Çok satırlı format: /**  */
 
 ```
-@Todo('Dash', 'Implement this function')
-void doSomething() {
-  print('Do something');
+/// Bu bir tek satırlı documentation comment örneğidir
+void birMethod() {}
+
+/** 
+  Bu ise çok satırlı
+  documentation comment örneğidir
+*/
+void digerMethod() {}
+```
+
+:::note
+Documentation comments içinde köşeli parantez [] kullanarak kodunuzdaki diğer elemanlara referans verebilirsiniz.
+:::
+
+### En İyi Uygulamalar
+
+1. **Açıklayıcı Olun**
+
+* Her public API elemanını dokümante edin
+* Methodların ne yaptığını net bir şekilde açıklayın
+* Parametrelerin ne işe yaradığını belirtin
+
+
+2. **Format Kuralları**
+
+* Her documentation comment bir tam cümle ile başlamalı
+* Noktalama işaretlerine dikkat edin
+* Paragraflar arasında boş satır bırakın
+
+
+3. **Örnekler Ekleyin**
+```
+/// String'i tersine çevirir.
+///
+/// Örnek:
+/// ```dart
+/// print(reverseString('hello')); // Çıktı: 'olleh'
+/// ```
+String reverseString(String input) {
+  return input.split('').reversed.join();
 }
 ```
 
+4. Özel Durumları Belirtin
+
+* Methodun fırlatacağı exception'ları belirtin
+* Null olabilecek değerleri işaretleyin
+* Performans uyarılarını ekleyin
+
+### Dart Doc Etiketleri
+
+* @deprecated - Kullanımdan kaldırılmış API'ları işaretler
+* @override - Override edilmiş methodları belirtir
+* @required - Zorunlu parametreleri işaretler
+* @todo - Yapılacak işleri belirtir
+
+```
+/// Bu eski bir method, bunun yerine [yeniMethod] kullanın.
+@deprecated
+void eskiMethod() {}
+```
+
+* İyi yazılmış documentation comments:
+
+    - Kodunuzu daha anlaşılır kılar
+    - Ekip içi iletişimi kolaylaştırır
+    - Otomatik dokümantasyon oluşturmayı sağlar
+    - Kodunuzun bakımını kolaylaştırır
 ## Quiz
 
-<TabbedContent code >
+<TabContent code >
 <TabItem value="Soru"> 
 <br/>
-Bu iki annotation arasındaki fark nedir ve hangisini kullanmak daha iyi bir pratiktir?
+Bu örnekte üçüncü satırdaki yorum türü nedir?
 ```
-@deprecated
-void oldFunction() {}
-
-@Deprecated('Use newFunction() instead')
-void anotherOldFunction() {}
+// Bu bir yorum satırı
+/* Bu bir çoklu
+   yorum satırı */
+/// Bu nasıl bir yorum satırı?
 ```
 <br/>
 </TabItem> 
 
 <TabItem value="Cevap"> 
 <br/>
-@Deprecated mesaj parametresi alırken, @deprecated almaz. Dart'ta @Deprecated kullanmak ve bir açıklama mesajı eklemek daha iyi bir pratiktir çünkü diğer geliştiricilere hangi alternatifi kullanmaları gerektiğini açıkça belirtir.
+Documentation comment (Belgeleme yorumu). Bu tür yorumlar /// ile başlar ve Dart Doc tarafından otomatik olarak API dokümantasyonu oluşturmak için kullanılır.
 <br/>
 </TabItem> 
-</TabbedContent> 
+</TabContent> 
 
-
-
-<TabbedContent code >
+<TabContent code >
 <TabItem value="Soru"> 
 <br/>
-Bu kod çalışır mı? Eğer çalışırsa, ne işe yarar?
+Bu kod geçerli midir? Neden?
 ```
-class Task {
-  final String assignee;
-  final String description;
-
-  const Task(this.assignee, this.description);
-}
-
-@Task('Ali', 'Fix login bug')
-void updateLogin() {}
+/*
+  Bu bir yorum
+  /* Bu da içeride bir yorum */
+  Hala yorum içindeyiz
+*/
 ```
 <br/>
 </TabItem> 
 
 <TabItem value="Cevap"> 
 <br/>
-Evet, çalışır. Bu, özel bir metadata annotation'ıdır. Task sınıfı bir metadata olarak kullanılabilir çünkü const constructor'a sahip. Bu annotation, updateLogin fonksiyonuna görevin kime atandığı ve ne yapılması gerektiği bilgisini ekler.
+Evet, geçerlidir. Çünkü Dart'ta çok satırlı yorumlar iç içe (nested) olabilir.
 <br/>
 </TabItem> 
-</TabbedContent> 
+</TabContent> 
 
 
-<TabbedContent code >
+<TabContent code >
 <TabItem value="Soru"> 
 <br/>
-@override annotation'ı burada ne işe yarıyor?
+Aşağıdaki documentation comment'te köşeli parantezlerin [[]] amacı nedir?
 ```
-class Animal {
-  void makeSound() {}
-}
-
-class Dog extends Animal {
-  @override
-  void makeSound() {
-    print('Woof!');
-  }
-}
+/// [name] parametresi kullanıcının adını alır
+/// [age] parametresi kullanıcının yaşını alır
+void createUser(String name, int age) {}
 ```
 <br/>
 </TabItem> 
 
 <TabItem value="Cevap"> 
 <br/>
-@override annotation'ı, bir metodun üst sınıftaki bir metodu override ettiğini (yeniden tanımladığını) açıkça belirtir. Bu, kodun okunabilirliğini artırır ve yanlışlıkla yanlış metot imzası kullanılmasını önler.
+Köşeli parantezler, documentation comments içinde kod elemanlarına (parametreler, methodlar, sınıflar vb.) referans vermek için kullanılır.
 <br/>
 </TabItem> 
-</TabbedContent> 
+</TabContent> 
 
-<TabbedContent code >
+<TabContent code >
 <TabItem value="Soru"> 
 <br/>
-Bir kod parçasına birden fazla metadata annotation eklenebilir mi? Bu örnekte ne oluyor?
+Bu iki yorum satırı arasındaki temel fark nedir?
 ```
-@Todo('Alice', 'Complete this')
-@Deprecated('Use newFunction instead')
-void oldFunction() {}
+// TODO: Bu methodu güncelle
+void oldMethod() {}
+
+/// @deprecated 'newMethod()' kullanın
+void oldMethod2() {}
 ```
 <br/>
 </TabItem> 
 
 <TabItem value="Cevap"> 
 <br/>
-Evet, birden fazla metadata annotation eklenebilir. Bu örnekte, fonksiyon hem yapılması gereken bir işi (@Todo) belirtiyor, hem de kullanımdan kaldırılmış (@Deprecated) olduğunu gösteriyor.
+İlk satır basit bir TODO yorumu iken, ikinci satır bir documentation comment ve @deprecated etiketidir. İkincisi Dart Doc tarafından işlenir ve resmi dokümantasyonda görünür.
 <br/>
 </TabItem> 
-</TabbedContent> 
+</TabContent> 
 
-<TabbedContent code >
+<TabContent code >
 <TabItem value="Soru"> 
 <br/>
-Bu kodda metadata olarak kullanılan sınıfın constructor'ı neden const olmalıdır?
+Bu kod parçasında kaç farklı yorum stili kullanılmıştır?
 ```
-class Logger {
-  final String prefix;
-  const Logger(this.prefix);
-}
-
-class Debug extends Logger {
-  const Debug() : super('DEBUG');
-}
-
-@Debug()
-void logMessage() {
-  print('Test message');
+void calculate() {
+  // Bu bir yorum
+  int x = 5; // Bu da bir yorum
+  /* Bu da
+     bir yorum */
 }
 ```
 <br/>
@@ -196,7 +241,10 @@ void logMessage() {
 
 <TabItem value="Cevap"> 
 <br/>
-Metadata'lar compile-time'da değerlendirilmelidir, bu yüzden constructor'ların const olması gerekir. const constructor'lar, derleme zamanında sabit değerler oluşturur ve bu değerler metadata olarak kullanılabilir.
+2 farklı yorum stili kullanılmıştır:
+
+Tek satırlık yorumlar (//)
+Çok satırlı yorumlar (/* */)
 <br/>
 </TabItem> 
-</TabbedContent> 
+</TabContent> 

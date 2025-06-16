@@ -1,235 +1,197 @@
 ---
-
-title: ""
-metaTitle: "Getting started with Prisma Pulse"
-metaDescription: "Learn how to get up and running with Prisma Pulse."
-sidebar_label: "Libraries & imports"
-tocDepth: 4
-toc: true
-
+title: "Açıklama"
+layout: "okuyarakogren-content"
+topic: "Açıklama"
+description: "Bu derste oparatör hakkında genel bir bilgilendirme yapılmaktadır."
+slug: dart/5_
+prev_page: /dart/4_
+prev_title: "Operator"
+next_title: "Library"
+next_page: /dart/6_
+git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/5_.mdx
 ---
 
-import {
-  Bolt,
-  BorderBox,
-  BoxTitle,
-  Inspect,
-  Database,
-  Grid,
-  LinkCard,
-  List,
-  SignalStream,
-  SquareLogo,
-} from '@site/src/components/GettingStarted';
-
 <BorderBox>
-<BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
-<span style={{ fontSize: '24px' }}>
-Dart'ın muhteşem LEGO setine Libraries & Imports'a hoş geldiniz!\
-Bu harika yapı taşlarıyla kodunuzu modüler hale getirebilir,başkalarının kodlarını kendi projenize dahil edebilir ve kendi kod kütüphanenizi oluşturabilirsiniz.\
-Bir mimar gibi tasarla, bir koleksiyoner gibi topla ve
-bir usta gibi birleştir. Kodun yapı ustaları iş başına! 🏰
-</span>
+  <BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
+  <span style={{ fontSize: "24px" }}>
+    Kodunuza süper güçler kazandırmaya hazır mısınız?\ İşte karşınızda Metadata! Bu küçük `@`
+    işaretli süper kahramanlar, kodunuza ekstra bilgiler ekler, özel yetenekler kazandırır ve onu
+    daha akıllı hale getirir.\ Bir süper kahraman gibi kodunuzu güçlendirecek, bir etiketleyici gibi
+    organize edecek ve bir büyücü gibi özel yetenekler katacaksınız.\ Metadata büyüsü başlasın! ✨
+  </span>
 </BorderBox>
 
-## Genel Bakış
+- Kodunuz hakkında ek bilgi vermek için meta verileri kullanın. Bir meta veri açıklaması `@` karakteriyle başlar ve bunu derleme zamanı sabitine (örneğin deprecated) bir başvuru veya sabit oluşturucuya bir çağrı izler.
 
-* Libraries ve import direktifleri, modüler ve paylaşılabilir bir kod tabanı oluşturmanıza yardımcı olur. Libraries sadece API'ler sağlamakla kalmaz, aynı zamanda bir gizlilik birimidir: alt çizgi (_) ile başlayan tanımlayıcılar yalnızca library içinde görünürdür. Her Dart dosyası (ve parçaları), library direktifini kullanmasa bile bir library'dir.
-
-* Libraries'ler packages kullanılarak dağıtılabilir.
-
-:::note
-Dart'ın public veya private gibi erişim belirleyici anahtar kelimeler yerine alt çizgi kullanmasının nedenini öğrenmek için [SDK issue 3338](https://github.com/dart-lang/sdk/issues/33383)'e bakabilirsiniz.
-:::
-
-## Libraries Kullanımı
-
-* Bir library'den gelen namespace'in başka bir library kapsamında nasıl kullanılacağını belirtmek için import kullanılır.
-
-* Örneğin, Dart web uygulamaları genellikle dart:html library'sini şu şekilde import eder:
+- Tüm Dart kodlarında dört açıklama mevcuttur: `@Deprecated`, `@deprecated`, `@override` ve `@pragma`. `@override` kullanımına ilişkin örnekler için bkz. Bir sınıfı genişletme. İşte `@Deprecated` açıklamasının kullanımına ilişkin bir örnek:
 
 ```
-import 'dart:html';
-```
+class Television {
+  /// Bunun yerine gücü açmak için [turnOn]'u kullanın.
+  @Deprecated('Use turnOn instead')
+  void activate() {
+    turnOn();
+  }
 
-* Import için gerekli tek argüman, library'yi belirten bir URI'dir. Yerleşik library'ler için URI, özel dart: şemasına sahiptir. Diğer library'ler için dosya sistemi yolu veya package: şemasını kullanabilirsiniz:
-
-```
-import 'package:test/test.dart';
-```
-
-## Library Prefix Belirleme
-
-* İki library'de çakışan tanımlayıcılar varsa, bir veya her iki library için prefix belirtebilirsiniz:
-
-```
-import 'package:lib1/lib1.dart';
-import 'package:lib2/lib2.dart' as lib2;
-
-// lib1'den Element kullanır
-Element element1 = Element();
-
-// lib2'den Element kullanır
-lib2.Element element2 = lib2.Element();
-```
-
-## Library'nin Bir Kısmını Import Etme
-
-* Bir library'nin yalnızca bir kısmını kullanmak istiyorsanız, seçici olarak import edebilirsiniz:
-
-```
-// Sadece foo'yu import et
-import 'package:lib1/lib1.dart' show foo;
-
-// foo HARİÇ tüm isimleri import et
-import 'package:lib2/lib2.dart' hide foo;
-```
-
-## Lazy Loading Library
-
-* Deferred loading (lazy loading olarak da bilinir), bir web uygulamasının bir library'yi ihtiyaç duyulduğunda yüklemesine olanak tanır. Deferred loading'i şu durumlarda kullanabilirsiniz:
-
-    - Web uygulamasının başlangıç süresini azaltma
-    - A/B testing yapma
-    - Nadiren kullanılan özellikleri yükleme
-
-* Library'yi lazy load etmek için, önce deferred as kullanarak import edin:
-
-```
-import 'package:greetings/hello.dart' deferred as hello;
-```
-
-* Library'ye ihtiyaç duyduğunuzda, loadLibrary()'yi çağırın:
-
-```
-Future<void> greet() async {
-  await hello.loadLibrary();
-  hello.printGreeting();
+  /// Televizyonun gücünü açar.
+  void turnOn() {...}
+  // ···
 }
 ```
 
-## Library Directive
+- Bir mesaj belirtmek istemiyorsanız `@deprecated` kullanabilirsiniz. Ancak, her zaman `@Deprecated` ile bir mesaj belirtmenizi öneririz.
 
-* Library seviyesinde doc comments veya metadata annotations belirtmek için, dosyanın başında bir library bildirimine ekleyin:
+- Kendi meta veri açıklamalarınızı tanımlayabilirsiniz. İşte iki argüman alan bir `@Todo` açıklaması tanımlamanın bir örneği:
 
 ```
-/// Harika bir test library'si.
-@TestOn('browser')
-library;
+class Todo {
+  final String who;
+  final String what;
+
+  const Todo(this.who, this.what);
+}
 ```
 
-## Libraries Oluşturma
-* Bir package oluşturmak için şu konulara dikkat edin:
+- Ve işte `@Todo` ek açıklamasının kullanımına dair bir örnek:
 
-    - Library kaynak kodunu nasıl düzenleyeceğiniz
-    - Export directive'ini ne zaman kullanacağınız
-    - Part directive'ini ne zaman kullanacağınız
-    - Birden çok platformu destekleyen bir library için conditional imports ve exports nasıl kullanılır
-
+```
+@Todo('Dash', 'Implement this function')
+void doSomething() {
+  print('Do something');
+}
+```
 
 ## Quiz
 
-<TabbedContent code >
+<TabContent code >
 <TabItem value="Soru"> 
 <br/>
-Bu kod çalıştığında ne olur ve neden iki farklı import şekli kullanılmış?
+Bu iki annotation arasındaki fark nedir ve hangisini kullanmak daha iyi bir pratiktir?
 ```
-import 'dart:math';
-import 'dart:math' as mathematics;
+@deprecated
+void oldFunction() {}
 
-void main() {
-  print(sqrt(16));
-  print(mathematics.sqrt(16));
+@Deprecated('Use newFunction() instead')
+void anotherOldFunction() {}
+
+```
+<br/>
+</TabItem>
+
+<TabItem value="Cevap">
+<br/>
+@Deprecated mesaj parametresi alırken, @deprecated almaz. Dart'ta @Deprecated kullanmak ve bir açıklama mesajı eklemek daha iyi bir pratiktir çünkü diğer geliştiricilere hangi alternatifi kullanmaları gerektiğini açıkça belirtir.
+<br/>
+</TabItem>
+</TabContent>
+
+
+
+<TabContent code >
+<TabItem value="Soru">
+<br/>
+Bu kod çalışır mı? Eğer çalışırsa, ne işe yarar?
+```
+
+class Task {
+final String assignee;
+final String description;
+
+const Task(this.assignee, this.description);
 }
+
+@Task('Ali', 'Fix login bug')
+void updateLogin() {}
+
 ```
 <br/>
-</TabItem> 
+</TabItem>
 
-<TabItem value="Cevap"> 
+<TabItem value="Cevap">
 <br/>
-Kod çalışır ve her iki print de 4.0 değerini yazdırır. İkinci import 'as' keyword'ü ile bir prefix kullanır. Bu örnek gereksiz bir kullanımdır çünkü aynı kütüphaneyi iki kez import eder. Prefix'ler genellikle isim çakışmalarını önlemek için farklı kütüphaneler arasında kullanılır.
+Evet, çalışır. Bu, özel bir metadata annotation'ıdır. Task sınıfı bir metadata olarak kullanılabilir çünkü const constructor'a sahip. Bu annotation, updateLogin fonksiyonuna görevin kime atandığı ve ne yapılması gerektiği bilgisini ekler.
 <br/>
-</TabItem> 
-</TabbedContent>
+</TabItem>
+</TabContent>
 
-<TabbedContent code >
-<TabItem value="Soru"> 
+
+<TabContent code >
+<TabItem value="Soru">
 <br/>
-Bu import ifadesi ne yapar?
+@override annotation'ı burada ne işe yarıyor?
 ```
-// lib1.dart içerisinde foo ve bar fonksiyonları var
-import 'package:example/lib1.dart' show foo;
-```
-<br/>
-</TabItem> 
 
-<TabItem value="Cevap"> 
-<br/>
-show keyword'ü ile yapılan bu import, lib1.dart dosyasından sadece foo fonksiyonunu import eder. Diğer tüm öğeler (örneğin bar fonksiyonu) import edilmez. Bu, seçici import yaparak sadece ihtiyacımız olan parçaları almamızı sağlar.
-<br/>
-</TabItem> 
-</TabbedContent>
-
-
-<TabbedContent code >
-<TabItem value="Soru"> 
-<br/>
-deferred as kullanmanın amacı nedir?
-```
-import 'package:greetings/hello.dart' deferred as hello;
-
-Future<void> greetLater() async {
-  print('Starting...');
-  await hello.loadLibrary();
-  hello.sayHello();
+class Animal {
+void makeSound() {}
 }
-```
-<br/>
-</TabItem> 
 
-<TabItem value="Cevap"> 
-<br/>
-deferred as lazy loading (geç yükleme) için kullanılır. Bu sayede kütüphane başlangıçta değil, sadece ihtiyaç duyulduğunda yüklenir. Bu özellikle web uygulamalarında başlangıç yükleme süresini azaltmak için kullanışlıdır.
-<br/>
-</TabItem> 
-</TabbedContent>
-
-<TabbedContent code >
-<TabItem value="Soru"> 
-<br/>
-Dart'ta bir sınıfı private yapmak için neden alt çizgi (_) kullanılır ve bu sınıfa başka dosyalardan erişilebilir mi?
-```
-class _PrivateClass {
-  void doSomething() {}
+class Dog extends Animal {
+@override
+void makeSound() {
+print('Woof!');
 }
+}
+
 ```
 <br/>
-</TabItem> 
+</TabItem>
 
-<TabItem value="Cevap"> 
+<TabItem value="Cevap">
 <br/>
-Alt çizgi (_) ile başlayan isimler sadece kendi library'si içinde görünür olur. _PrivateClass'a sadece tanımlandığı dosyadan erişilebilir, başka dosyalardan erişilemez. Dart'ta bu yöntem, geleneksel private, public keyword'leri yerine kullanılır.
+@override annotation'ı, bir metodun üst sınıftaki bir metodu override ettiğini (yeniden tanımladığını) açıkça belirtir. Bu, kodun okunabilirliğini artırır ve yanlışlıkla yanlış metot imzası kullanılmasını önler.
 <br/>
-</TabItem> 
-</TabbedContent>
+</TabItem>
+</TabContent>
 
-<TabbedContent code >
-<TabItem value="Soru"> 
+<TabContent code >
+<TabItem value="Soru">
 <br/>
-Bir dosyada library keyword'ü kullanılmasa bile o dosya bir library sayılır mı?
+Bir kod parçasına birden fazla metadata annotation eklenebilir mi? Bu örnekte ne oluyor?
 ```
-// math_lib.dart
-library math_lib;
 
-// main.dart
-import 'math_lib.dart';
+@Todo('Alice', 'Complete this')
+@Deprecated('Use newFunction instead')
+void oldFunction() {}
+
 ```
 <br/>
-</TabItem> 
+</TabItem>
 
-<TabItem value="Cevap"> 
+<TabItem value="Cevap">
 <br/>
-Evet. Dart'ta her dosya, library direktifini açıkça kullanmasa bile bir library'dir. library keyword'ü opsiyoneldir ve genellikle library'ye isim vermek veya metadata eklemek için kullanılır.
+Evet, birden fazla metadata annotation eklenebilir. Bu örnekte, fonksiyon hem yapılması gereken bir işi (@Todo) belirtiyor, hem de kullanımdan kaldırılmış (@Deprecated) olduğunu gösteriyor.
 <br/>
-</TabItem> 
-</TabbedContent>
+</TabItem>
+</TabContent>
+
+<TabContent code >
+<TabItem value="Soru">
+<br/>
+Bu kodda metadata olarak kullanılan sınıfın constructor'ı neden const olmalıdır?
+```
+
+class Logger {
+final String prefix;
+const Logger(this.prefix);
+}
+
+class Debug extends Logger {
+const Debug() : super('DEBUG');
+}
+
+@Debug()
+void logMessage() {
+print('Test message');
+}
+
+```
+<br/>
+</TabItem>
+
+<TabItem value="Cevap">
+<br/>
+Metadata'lar compile-time'da değerlendirilmelidir, bu yüzden constructor'ların const olması gerekir. const constructor'lar, derleme zamanında sabit değerler oluşturur ve bu değerler metadata olarak kullanılabilir.
+<br/>
+</TabItem>
+</TabContent>
+```

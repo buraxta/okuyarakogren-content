@@ -1,288 +1,105 @@
 ---
-title: ""
-metaTitle: "Getting started with Prisma Pulse"
-metaDescription: "Learn how to get up and running with Prisma Pulse."
-sidebar_label: "İndirme ve Kurma"
-tocDepth: 4
-toc: true
+title: "Dart'a Giriş"
+layout: "okuyarakogren-content"
+topic: "Dart"
+description: "Bu derste Dart hakkında genel bir bilgilendirme yapılmaktadır."
+slug: dart/0_
+next_page: /dart/1_
+next_title: "İndirme ve Kurma"
+prev_page: ""
+prev_title: ""
+git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/0_.mdx
+pageType: "dart"
 ---
 
-import {
-  Bolt,
-  BorderBox,
-  BoxTitle,
-  Inspect,
-  Database,
-  Grid,
-  LinkCard,
-  List,
-  SignalStream,
-  SquareLogo,
-} from '@site/src/components/GettingStarted';
+<BoxTitle>Dart'a Giriş</BoxTitle>
 
-<BorderBox>
-<BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
-<span style={{ fontSize: '24px' }}>
-Dart dünyasına adım atmaya hazır mısın? Bu yolculukta seni hızlı ve eğlenceli bir başlangıç bekliyor.
-Dart, seni mobil, web ve daha fazlasıyla buluşturacak güce sahip. 
-Hazırsan klavyene sıkıca tutun, çünkü şimdi Dart’ı nasıl kuracağını öğreniyoruz! 🚀 
-</span>
-</BorderBox>
+<Box>
+<BoxTitle>Hoş Geldiniz 👋</BoxTitle>
+<ParagraphHighlight>
+-> Dart, Google’ın mühendislerinden çıkan, kod yazmayı eğlenceli hale getiren modern bir programlama dilidir. İster web ister mobil uygulama geliştirin, Dart hızı, esnekliği ve kolay öğrenilebilirliğiyle size eşlik etmeye hazır. Ayrıca, Flutter sayesinde Dart, mobil dünyada adeta yıldız gibi parlıyor!
 
-:::tip
-Eğer Flutter SDK'sını kurduysanız veya kurmayı planlıyorsanız, Flutter SDK'sı zaten Dart SDK'sının tamamını içerir. Bu nedenle, Dart programlama dilini kullanmak için Dart'ı ayrıca kurmanıza gerek yoktur.
-:::
+Hadi dart dilini biraz daha yakından tanıyalım.
 
-## Sistem Gereksinimleri
+</ParagraphHighlight>
 
-| Platform | x64 | IA32 (x86) | Arm32 | Arm64 | RISC-V (RV64GC) | OS Versions |
-|----------|:---:|:----------:|:-----:|:-----:|:---------------:|-------------|
-| Windows  | ✅  | ⚠️         | ❌    | ✅    | ⚪️             | 10, 11 |
-| Linux    | ✅  | ⚠️         | ✅    | ✅    | ✅              | Debian stable, <br/> Ubuntu LTS standart destek altında |
-| macOS    | ✅  | ❌         | ⚪️   | ✅    | ⚪️             | macOS'un son üç sürümü: <br/> Sonoma (14), Ventura (13), Monterey (12) |
+</Box>
 
-✅ Tüm kanallarda desteklenir.<br/>
-⚠️ Destek kalktı ve gelecekteki bir Dart sürümünde tamamen kaldırılabilir.<br/>
-❌ Tüm kanallarda desteklenmez.<br/>
-⚪️ İşletim sistemi tarafından desteklenmez.
+## Dart Nedir?
 
-## Dart ı nasıl indirebilirim
+- Dart, Google tarafından geliştirilen, modern yazılım geliştirme süreçlerini desteklemek amacıyla tasarlanmış açık kaynaklı bir programlama dilidir. Nesne Yönelimli Programlama **(Object-Oriented Programming - OOP)** paradigmasını temel alır ve sınıf tabanlı bir yapı sunar. Dart, OOP'nin yapı taşları olan sınıflar **(classes)**, nesneler **(objects)**, kalıtım **(inheritance)**, çok biçimlilik **(polymorphism)**, soyutlama **(abstraction)** ve kapsülleme **(encapsulation)** gibi özellikleri destekler. Bu sayede, büyük ölçekli ve yeniden kullanılabilir kod yapıları oluşturmayı kolaylaştırır.
 
-<TabbedContent code >
-<TabItem value="Windows"> 
-## Chocolatey kullanarak kurulum
-<br/>
-* Dart SDK'yı yüklemek için [Chocolatey](https://chocolatey.org/) kullanın. Chocolatey [yükseltilmiş izinler](https://www.thewindowsclub.com/elevated-privileges-windows) gerektirir.
+- Dart, aynı zamanda fonksiyonel programlama **(functional programming)** paradigmalarını da benimser. Birinci sınıf fonksiyonlar **(first-class functions)**, anonim fonksiyonlar **(anonymous functions)** ve lambda ifadeleri **(lambda expressions)** gibi modern programlama konseptlerini destekler. Statik tip kontrolü **(static typing)** ve dinamik tip desteği **(dynamic typing)** arasında esneklik sunarak, hem güvenli hem de esnek kod yazılmasına olanak tanır. Bu kombinasyon, geliştiricilere derleme sırasında **(compile-time)** veya çalışma zamanında **(runtime)** farklı ihtiyaçlara uygun çözümler sunar.
 
-1. Chocolatey'i kurun.
-2. PowerShell'i yükseltilmiş izinlerle başlatın.
-```
-PS C:\> choco install dart-sdk
-```
-<br/>
-## Varsayılan kurulum yolunu değiştir
-<br/>
-* Varsayılan olarak, Chocolatey SDK'yı `C:\tools\dart-sdk` konumuna yükler. Bu konumu değiştirmek için [ChocolateyToolsLocation](https://stackoverflow.com/questions/19752533/how-do-i-set-chocolatey-to-install-applications-onto-another-drive/68314437#68314437) ortam değişkenini istediğiniz kurulum dizinine ayarlayın.
-<br/>
-## PATH'inizin Dart'ı içerdiğini doğrulayın
-<br/>
-* Dart'ı çalıştırabildiğinizi doğrulayın.
+- Dart, hem Just-in-Time **(JIT)** hem de Ahead-of-Time **(AOT)** derleme tekniklerini destekler. JIT derleme, geliştirme sırasında hızlı prototipleme yapılmasını sağlarken, AOT derleme, üretim ortamında yüksek performanslı uygulamalar oluşturur. Dart'ın **garbage collection** mekanizması, bellek yönetimini otomatize ederek performans ve güvenilirlik sağlar.
 
-```PowerShell
-PS dart --version
-Dart SDK version: 3.2.4 (stable) (Thu Dec 21 19:13:53 2023 +0000) on "win_x64"
-```
-<br/>
-* Geliştirme makineniz bir Dart sürümü döndürmüyorsa, SDK konumunu PATH'inize ekleyin:
+- Dart, framework tabanlı bir geliştirme ortamında güçlü bir rol oynar ve özellikle Google’ın çok platformlu geliştirme çözümü olan Flutter ile entegre çalışır. Dart sayesinde, bir kez yazılan kod, web, mobil (iOS ve Android), masaüstü (Windows, macOS, Linux) gibi farklı platformlarda çalışabilir. Web uygulamaları için JavaScript'e transpile edilebilmesi, Dart'ı yalnızca mobil değil, modern web geliştirme süreçlerinde de önemli bir araç haline getirir. Tüm bu özellikler, Dart'ı performans, ölçeklenebilirlik ve geliştirici deneyimi açısından güçlü ve kapsamlı bir programlama dili yapar.
 
-1. Windows arama kutusuna `env` yazın.
-2. `Sistem ortam değişkenlerini düzenle`'ye tıklayın.
-3. `Ortam Değişkenleri`'ne tıklayın....
-4. Kullanıcı değişkeni bölümünde `Yol`'u seçin ve `Düzenle`'ye tıklayın....
-5. `Yeni`'ye tıklayın ve dart-sdk dizinine giden yolu girin.
-6. Az önce açtığınız her pencerede, kapatmak ve yol değişikliğini uygulamak için `Uygula` veya `Tamam`'a tıklayın.
+## Dart Neden Kullanılır?
 
-## Chocolatey kullanarak yükseltme
-<br/>
-* Dart SDK'yı yükseltmek için aşağıdaki komutu kullanın.
+**1. Performans ve Verimlilik**
 
-```PowerShell
-PS choco upgrade dart-sdk
-```
-<br/>
-## Chocolatey kullanarak kaldır
-<br/>
-* Dart SDK'yı kaldırmak için aşağıdaki adımları izleyin.
+- Dart, doğrudan yerel makine koduna derlenebilir. Bu, uygulamaların hızlı çalışmasını sağlar.
+  Aynı zamanda, web için JavaScript koduna derlenebilir, bu da Dart'ı web uygulamaları için uygun hale getirir.
 
-1. PowerShell'i yükseltilmiş izinlerle başlatın.
-2. Aşağıdaki komutu kullanın.
+**2. Kullanım Kolaylığı ve Öğrenilebilirlik**
 
-```PowerShell
-PS choco uninstall dart-sdk
-```
-<br/>
-3. Dart yapılandırma dosyalarını ana dizininizden kaldırın.
-```PowerShell
-PS Remove-Item -Recurse -Force ^
-     -Path $env:LOCALAPPDATA\.dartServer,$env:APPDATA\.dart,$env:APPDATA\.dart-tool
-```
+- Dart'ın söz dizimi (syntax) birçok geliştiriciye tanıdık gelir; özellikle JavaScript, Java, C# ve Python gibi dilleri bilenler için kolay bir öğrenme eğrisi sunar.
 
-</TabItem> 
+**2. Çok Platformlu Uygulama Geliştirme**
 
-<TabItem value="Linux"> 
-## Linux paket yöneticisini kullanarak kurulum yapın
-<br/>
-* Dart SDK'yı Ubuntu veya Debian'a kurmak için iki seçeneğiniz var:
-1. `apt-get` komutunu kullanın .
-2. `.deb` paketi indirin ve `dpkg` komutu çalıştırın.
-<br/>
-## `apt-get` Paket yöneticisini kullanarak kurulum yapın
-<br/>
-* Dart'ı `apt-get` ile kurmak için aşağıdaki adımları uygulayın.
-<br/>
-1. Paket dizin dosyalarını güncelleyin ve güvenli HTTP paketini yükleyin.
-```PowerShell
-sudo apt-get update && sudo apt-get install apt-transport-https
-```
-<br/>
-2. Google Linux GPG genel anahtarını indirin ve ekleyin.
-```
-wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub \
-  | sudo gpg  --dearmor -o /usr/share/keyrings/dart.gpg
-```
-<br/>
-3. Dart paket deposunu Linux sisteminize ekleyin.
-```PowerShell
-echo 'deb [signed-by=/usr/share/keyrings/dart.gpg arch=amd64] https://storage.googleapis.com/download.dartlang.org/linux/debian stable main' \
-  | sudo tee /etc/apt/sources.list.d/dart_stable.list
-```
-<br/>
-4. Aşağıdaki sudo apt-get komutlarını kullanın.
-```PowerShell
-sudo apt-get update && sudo apt-get install dart
-```
-<br/>
-## Debian paketi olarak kurun
-<br/>
-* Dart SDK'yı Debian paketi `(*.deb)` olarak yüklemek için aşağıdaki adımları uygulayın.
-1. Dart SDK [Debian](https://storage.googleapis.com/dart-archive/channels/stable/release/latest/linux_packages/dart_3.6.0-1_amd64.deb) paketini indirin.
-2. `*.deb` paketini yüklemek için `sudo dpkg` komutunu kullanın.
-```PowerShell
-sudo dpkg -i dart_3.4.0-1_amd64.deb
-```
-<br/>
-dart_3.4.0-1_amd64.deb dosyasını geçerli dosya adıyla değiştirin.
-<br/>
-## Dart SDK'sını yükseltin
-<br/>
-* SDK'yi kurmak için kullandığınız komutun aynısını kullanın.
-### `apt-get` kullanarak yükseltme
-* Dart SDK'yı apt-get ile yüklediyseniz, aşağıdaki sudo apt-get komutlarını kullanın.
-```PowerShell
-sudo apt-get update && sudo apt-get install dart
-```
-<br/>
-### dpkg kullanarak yükseltme
-<br/>
-* Dart SDK'yı `dpkg` ile yüklediyseniz `sudo dpkg` komutunu kullanın.
-```PowerShell
-sudo dpkg -i dart_3.2.6-1_amd64.deb
-```
-dart_3.4.0-1_amd64.deb dosyasını yeni yükseltmenin dosya adıyla değiştirin.
-<br/>
-## Dart SDK'yi kaldırın
-<br/>
-### `apt-get` kullanarak kaldır
-<br/>
-* Dart SDK'yı `apt-get` ile yüklediyseniz, `sudo apt-get remove` komutunu kullanın.
-<br/>
-1. sudo apt-get remove komutunu kullanın.
-<br/>
-```PowerShell
-sudo apt-get remove -y dart
-```
-<br/>
-2. Dart yapılandırma dosyalarını ana dizininizden kaldırın.
-<br/>
-```PowerShell
-rm -rf  ~/.dart*
-```
-<br/>
-### `dpkg` kullanarak kaldır
-<br/>
-* Dart SDK'yı `dpkg` ile yüklediyseniz `sudo dpkg --purge` komutunu kullanın.
-<br/>
-1. `sudo dpkg --purge` komutunu kullanın.
-<br/>
-```PowerShell
-sudo dpkg --purge dart
-```
-Bu işlem aynı zamanda yapılandırma dosyalarını da kaldırır.
-<br/>
-2. SDK'nın kaldırıldığını doğrulayın
-<br/>
-```PowerShell
-dpkg -l | grep dart
-```
-</TabItem> 
+- Dart, bir kod tabanı ile Android, iOS, web ve masaüstü uygulamaları geliştirme imkanı sağlar.
+  Flutter çerçevesiyle birlikte çalışarak hem görsel hem de işlevsel açıdan güçlü uygulamalar üretir.
 
-<TabItem value="macOS"> 
-## Homebrew kullanarak kurulum
-<br/>
-### Dart SDK'yı kurmak için [Homebrew](https://brew.sh/)'u kullanın.
-<br/>
-1. Gerekirse Homebrew'u yükleyin.
-2. [official tap](https://github.com/dart-lang/homebrew-dart) i ekleyin.
-<br/>
-```
-brew tap dart-lang/dart
-```
-<br/>
-3. Dart SDK’yı yükleyin.
-<br/>
-```
-brew install dart
-```
-<br/>
-## PATH'in Homebrew'u içerdiğini doğrulayın
-<br/>
-* PATH'inizin **Homebrew** bin dizinini içerdiğini doğrulayın. `Dart run` ve `dart format` gibi Dart SDK komutlarını kullanarak doğru yolu ayarlamak basitleşir.
-<br/>
-* PATH'inizi yapılandırma konusunda yardım almak için [Homebrew SSS](https://docs.brew.sh/FAQ#my-mac-apps-dont-find-homebrew-utilities)'ye bakın.
-<br/>
-## Homebrew kullanarak yükseltme
-<br/>
-* Dart'ın yeni bir sürümü çıktığında güncelleme yapmak için:
-<br/>
-```
-brew upgrade dart
-```
-<br/>
-## Dart sürümlerini değiştir
-<br/>
-* Yerel olarak yüklenen Dart sürümleri arasında geçiş yapmak için:
-<br/>
-1. Geçmek istediğiniz sürümü yükleyin.
-  - Örneğin Dart 3.1'i yüklemek için:
-<br/>
-```
-brew install dart@3.1
-```
-<br/>
-2. Sürümler arasında geçiş yapmak için geçerli sürümü bağlantısını kaldırın ve istediğiniz sürümü bağlayın.
-<br/>
-```
-brew unlink dart@<old> \
-  && brew unlink dart@<new> \
-  && brew link dart@<new>
-```
-<br/>
-## Kurulu Dart sürümlerini listele
-<br/>
-* Hangi Dart sürümlerini yüklediğinizi görmek için:
-<br/>
-```
-brew info dart
-```
-<br/>
-## Homebrew kullanarak kaldırma
-<br/>
-* Dart SDK'yı kaldırmak için [Homebrew](https://brew.sh/)'u kullanın.
-<br/>
-1. Dart SDK'yı kaldırın.
-<br/>
-```
-brew uninstall dart
-```
-<br/>
-2. Dart yapılandırma dosyalarını ana dizininizden kaldırın.
-<br/>
-```
-rm -rf  ~/.dart*
-```
+**3. Güçlü Araç Desteği**
 
-</TabItem> 
+- Dart için sunulan entegre araçlar (örneğin, DartPad, IntelliJ IDEA veya VS Code eklentileri) geliştirme sürecini hızlandırır ve hataları kolayca bulup düzeltmenizi sağlar.
 
+**4. Aktif Topluluk ve Sürekli Geliştirme**
 
-</TabbedContent> 
+- Dart, Google tarafından desteklenir ve düzenli güncellemelerle geliştirilir. Ayrıca, Flutter'ın popülerliği ile büyüyen bir topluluğa sahiptir.
 
+## Dart hangi alanlarda kullanabilirim?
+
+**1. Mobil Uygulama Geliştirme (Piyasadaki En Güçlü Alanı)**
+
+- Dart, mobil geliştirme dünyasında en çok Flutter Framework ile tanınır. Android ve iOS için performanslı ve modern uygulamalar geliştirmek isteyen ekipler tarafından tercih edilir. Flutter, widget tabanlı mimarisi sayesinde, zengin kullanıcı arayüzleri oluşturmayı kolaylaştırır ve tek bir kod tabanı ile iki platformda birden uygulama geliştirme imkanı sağlar.
+
+- Piyasa Avantajları:
+  Platform bağımsız geliştirme
+  Hızlı prototipleme
+  Yüksek performans
+
+- Mobil uygulama geliştirme, Dart'ın piyasa açısından en güçlü olduğu alandır. Flutter'ın popülerliği sayesinde, Dart bu alanda büyük bir avantaja sahiptir.
+
+**2. Web Uygulamaları (Sınırlı Piyasa Kullanımı)**
+
+- Dart, tarayıcı uyumlu hale getirilmek için JavaScript'e transpile edilebilir. Web geliştirme için Dart, genellikle Flutter for Web çerçevesinde kullanılır. Flutter ile bir mobil projeyi web uygulamasına dönüştürmek mümkündür. Ancak, sıfırdan web uygulaması geliştirme süreçlerinde Dart genellikle tercih edilmez.
+
+- Dart, web projelerinde nadiren tercih edilir. Bunun yerine React, Angular veya Vue.js gibi JavaScript ekosisteminin güçlü araçları daha yaygındır.
+  Dart'ın web alanındaki varlığı büyük ölçüde Flutter projelerinin genişletilmesiyle sınırlıdır.
+
+**3. Masaüstü Uygulama Geliştirme (Küçük Pazar Payı)**
+
+- Dart, masaüstü platformları (Windows, macOS, Linux) destekleyen bir çözüm sunar. Flutter Desktop, özellikle mobil uygulamaların masaüstü platformlarına genişletilmesinde kullanılır. Ancak bağımsız masaüstü uygulamaları geliştirme konusunda Dart, Electron veya Qt gibi teknolojilerle rekabet etmekte zorlanır.
+
+- Masaüstü uygulamalarında Dart, niş bir çözümdür ve genellikle Flutter projelerinin uzantısı olarak görülür.
+  Büyük ölçekli masaüstü projelerde yaygın değildir.
+
+**4. İki Boyutlu Oyun Geliştirme (2D Games)**
+
+- Dart, oyun geliştirme alanında doğrudan bir framework sunmasa da, Flame Engine gibi üçüncü taraf oyun motorlarıyla 2D oyunlar geliştirmek mümkündür. Flame, Flutter üzerine inşa edilmiş hafif bir oyun motorudur ve Dart'ın performansı ile birlikte basit oyunlar için uygun bir altyapı sunar.
+
+- Kullanım Alanları:\
+  Basit mobil oyunlar\
+  Arcade tarzı 2D oyunlar\
+  Eğitim projeleri veya hobi amaçlı oyun geliştirme\
+
+- Dart, oyun geliştirme sektöründe ana akım bir dil değildir. Unity (C#) ve Unreal Engine (C++) gibi güçlü oyun motorları sektöre hakimdir.
+  Ancak, basit 2D oyunlar veya Flutter ekosistemine bağlı uygulamalar için Dart ve Flame, etkili bir alternatif olabilir.
+
+<Alert type="danger">Bu bir hata mesajıdır.</Alert>
+<Alert type="info">Bu bir bilgi mesajıdır.</Alert>
+<Alert type="note">Bu bir not mesajıdır.</Alert>
+<Alert type="tip">Bu bir başarı mesajıdır.</Alert>
+<Alert type="warning">Bu bir uyarı mesajıdır.</Alert>

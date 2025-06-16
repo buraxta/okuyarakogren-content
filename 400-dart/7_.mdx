@@ -1,113 +1,80 @@
 ---
-
-title: ""
-metaTitle: "Getting started with Prisma Pulse"
-metaDescription: "Learn how to get up and running with Prisma Pulse."
-sidebar_label: "Built-in-types"
-tocDepth: 4
-toc: true
-
+title: "Keywords"
+layout: "okuyarakogren-content"
+topic: "Library"
+description: "Bu derste oparatör hakkında genel bir bilgilendirme yapılmaktadır."
+slug: dart/7_
+prev_page: /dart/6_
+prev_title: "Keywords"
+next_title: "Keywords"
+next_page: /dart/8_
+git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/7_.mdx
 ---
 
+<BorderBox>
+  <BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
+  <span style={{ fontSize: "24px" }}>
+    Dart'ın sihirli kelimelerine - Keywords'e hoş geldin!\ Bu özel kelimeler, kodumuzun temel yapı
+    taşlarıdır.\ Her biri özel bir görevi yerine getirir ve kodunuza anlam katar.\ Bazıları akışı
+    kontrol eder, bazıları sınıflar oluşturur,bazıları ise hataları yakalar.\ Hadi bu özel
+    kelimelerin dünyasına bir yolculuğa çıkalım ve her birinin süper güçlerini keşfedelim! 🚀
+  </span>
+</BorderBox>
 
-## Genel Bakış
+- Aşağıdaki tabloda Dart dilinin kendi kullanımı için ayırdığı kelimeler listelenmiştir. Aksi belirtilmediği sürece bu kelimeler tanımlayıcı olarak kullanılamaz. İzin verildiğinde bile, tanımlayıcı olarak anahtar kelimeler kullanmak kodunuzu okuyan diğer geliştiricileri şaşırtabilir ve bundan kaçınılmalıdır.
 
-Dart dilinde özel olarak desteklenen tipler şunlardır:
+# Dart Anahtar Kelimeler
 
-* Numbers (int, double)
-* Strings (String)
-* Booleans (bool)
-* Records ((value1, value2))
-* Functions (Function)
-* Lists (List, diziler olarak da bilinir)
-* Sets (Set)
-* Maps (Map)
-* Runes (Runes; genellikle characters API ile değiştirilir)
-* Symbols (Symbol)
-* Null değeri (Null)
+| Anahtar Kelime | Versiyon | Anahtar Kelime | Versiyon | Anahtar Kelime | Versiyon | Anahtar Kelime | Versiyon |
+| -------------- | -------- | -------------- | -------- | -------------- | -------- | -------------- | -------- |
+| abstract       | 2        | as             | 2        | assert         | -        | async          | 2        |
+| await          | 1        | base           | 3        | break          | -        | case           | -        |
+| catch          | -        | class          | -        | const          | -        | continue       | -        |
+| covariant      | 2        | default        | -        | deferred       | 2        | do             | -        |
+| dynamic        | 2        | else           | -        | enum           | -        | export         | 2        |
+| extends        | -        | extension      | 2        | external       | 2        | factory        | 2        |
+| false          | -        | final (var)    | -        | final (class)  | -        | finally        | -        |
+| for            | -        | Function       | 2        | get            | 2        | hide           | 3        |
+| if             | -        | implements     | 2        | import         | 2        | in             | -        |
+| interface      | 2        | is             | -        | late           | 2        | library        | 2        |
+| mixin          | 2        | new            | -        | null           | -        | of             | 3        |
+| on             | 3        | operator       | 2        | part           | 2        | required       | 2        |
+| rethrow        | -        | return         | -        | sealed         | 3        | set            | 2        |
+| show           | 3        | static         | 2        | super          | -        | switch         | -        |
+| sync           | 3        | this           | -        | throw          | -        | true           | -        |
+| try            | -        | type           | 2        | typedef        | 2        | var            | -        |
+| void           | -        | when           | 3        | with           | -        | while          | -        |
+| yield          | 1        |                |          |                |          |                |          |
 
-## Numbers (Sayılar)
+## Notlar
 
-* Dart'ta iki tür sayı vardır:
-1. **int**
-* 64-bit'ten büyük olmayan tam sayı değerleri
-* Native platformlarda: -2^63 ile 2^63 - 1 arası
-* Web'de: -2^53 ile 2^53 - 1 arası (JavaScript sayıları)
+- Versiyon numarası olmayan anahtar kelimeler (-) temel Dart dilinin parçasıdır
+- Versiyon 1: Asenkron programlama için eklenen anahtar kelimeler
+- Versiyon 2: Dart 2.0 ile gelen anahtar kelimeler
+- Versiyon 3: Dart 3.0 ile gelen anahtar kelimeler
 
-2. **double**
+## Kategoriler
 
-* 64-bit (double-precision) ondalıklı sayılar
-* IEEE 754 standardına uygun
+### Temel Kontrol Akışı
 
-```
-// Integer örnekleri
-var x = 1;
-var hex = 0xDEADBEEF;
+- if, else, for, while, break, continue, switch, case
 
-// Double örnekleri
-var y = 1.1;
-var exponents = 1.42e5;
+### Sınıf ve Nesne
 
-// Sayı dönüşümleri
-String -> int:
-var one = int.parse('1');
+- class, new, this, super, extends, implements
 
-String -> double:
-var onePointOne = double.parse('1.1');
+### Hata Yönetimi
 
-int -> String:
-String oneAsString = 1.toString();
+- try, catch, throw, rethrow, finally
 
-double -> String:
-String piAsString = 3.14159.toStringAsFixed(2);
-```
+### Asenkron Programlama
 
-## Strings
-* Dart string'leri UTF-16 code units dizisi tutar:
+- async, await, yield
 
-````
-var s1 = 'Tek tırnak kullanabilirsiniz';
-var s2 = "Çift tırnak da kullanabilirsiniz";
+### Modül ve Paket
 
-// String interpolation
-var name = 'Dart';
-print('Merhaba $name'); // Değişken kullanımı
-print('Merhaba ${name.toUpperCase()}'); // İfade kullanımı
+- import, export, library, part
 
-// Çok satırlı stringler
-var multiLine = '''
-Bu çok
-satırlı bir
-string örneğidir.
-''';
+### Değişken ve Tip
 
-// Raw string
-var rawString = r'Raw string içinde \n bile özel karakter sayılmaz';
-````
-
-## Booleans
-* Dart'ta boolean değerler için bool tipi kullanılır:
-```
-// Sadece true ve false değerlerini alabilir
-var dogru = true;
-var yanlis = false;
-
-// Boolean kontrol örnekleri
-var metin = '';
-assert(metin.isEmpty); // Boş string kontrolü
-
-var puan = 0;
-assert(puan == 0); // Sıfır kontrolü
-
-var deger = null;
-assert(deger == null); // Null kontrolü
-```
-
-## Önemli Notlar:
-
-* Her değişken bir nesneye (class instance) referanstır
-* Sayı literalleri compile-time sabitleridir
-* String'lerde hem tek hem çift tırnak kullanılabilir
-* Boolean değerler için açık kontroller yapılmalıdır
-* Tip dönüşümleri için özel metodlar mevcuttur
-* String interpolation için $ ve ${} kullanılır
+- var, dynamic, void, typedef, final

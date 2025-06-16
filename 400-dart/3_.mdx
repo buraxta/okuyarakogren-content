@@ -1,247 +1,580 @@
 ---
-
-title: ""
-metaTitle: "Getting started with Prisma Pulse"
-metaDescription: "Learn how to get up and running with Prisma Pulse."
-sidebar_label: "Yorum Satırı"
-tocDepth: 4
-toc: true
-
+title: "Operatörler"
+layout: "okuyarakogren-content"
+topic: "Operatorler"
+description: "Bu derste Dart hakkında genel bir bilgilendirme yapılmaktadır."
+slug: dart/3_
+prev_page: /dart/2_
+prev_title: "İndirme ve Kurma"
+next_page: /dart/4_
+next_title: "Yorum Satırları"
+git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/3_.mdx
+pageType: "dart"
 ---
-
-import {
-  Bolt,
-  BorderBox,
-  BoxTitle,
-  Inspect,
-  Database,
-  Grid,
-  LinkCard,
-  List,
-  SignalStream,
-  SquareLogo,
-} from '@site/src/components/GettingStarted';
 
 <BorderBox>
 <BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
 <span style={{ fontSize: '24px' }}>
-Kodun sessiz kahramanlarıyla yorum satırlarıyla tanışmaya hazır mısın?\
-Onlar kodunuzun gizli günlükçüleri, gelecekteki siz için bıraktığınız notlarve ekip arkadaşlarınız için yazdığınız mektuplar gibidir!\
-Bir dedektif gibi kodu aydınlatmak, bir öğretmen gibi açıklamak veya
-bir hikaye anlatıcısı gibi kodunuzu belgelemek için buradalar.\
-Hadi, kodunuza biraz renk katalım! 📝✨
+Kod dünyasının gizli süper kahramanlarıyla tanışmaya hazır mısın?\
+Evet, operatörlerden bahsediyoruz!\
+Operatörler, kodunu anlamlı hale getiren küçük ama etkili araçlardır. Onlar olmadan toplama yapamaz, karşılaştırmalar gerçekleştiremez ve hatta en basit kararları bile veremezdik!
+
+Bir matematikçi gibi toplama-çıkarma yapabilir, bir dedektif gibi eşitlikleri sorgulayabilir ya da bir büyücü gibi bitlerle oynayabilirsin. Hazırsan, operatörlerin sihirli dünyasına dalıyoruz. Hadi, kodun gücünü hisset!
+
 </span>
 </BorderBox>
 
+## Operatörler
 
-## Tek satırlık yorumlar
+- Dart, aşağıdaki tabloda gösterilen operatörleri destekler. Tablo, Dart'ın operatör ilişkilerinin bir yaklaşımı olan en yüksekten en düşüğe operatör ilişkisini ve operatör önceliğini gösterir. Bu operatörlerin çoğunu sınıf üyeleri olarak uygulayabilirsiniz .
 
-* Tek satırlık bir yorum `//` ile başlar.
-* `//` ile satır sonu arasındaki her şey Dart derleyicisi tarafından yok sayılır.
+### Operatör Tablosu
+
+| Tanım                    | Operatör                                               | Birleşme |
+| ------------------------ | ------------------------------------------------------ | -------- |
+| unary postfix            | `expr++` `expr--` `()` `[]` `?[]` `.` `?.` `!`         | None     |
+| unary prefix             | `-expr` `!expr` `-expr` `++expr` `--expr` `await expr` | None     |
+| multiplicative           | `*` `/` `%` `~/`                                       | Left     |
+| additive                 | `+` `-`                                                | Left     |
+| shift                    | `<<` `>>` `>>>`                                        | Left     |
+| bitwise AND              | `&`                                                    | Left     |
+| bitwise XOR              | `^`                                                    | Left     |
+| bitwise OR               | `\|`                                                   | Left     |
+| relational and type test | `>=` `>` `<=` `<` `as` `is` `is!`                      | None     |
+| equality                 | `==` `!=`                                              | None     |
+| logical AND              | `&&`                                                   | Left     |
+| logical OR               | `\|\|`                                                 | Left     |
+| if-null                  | `??`                                                   | Left     |
+| conditional              | `expr1 ? expr2 : expr3`                                | Right    |
+| cascade                  | `..` `?..`                                             | Left     |
+| assignment               | `=` `*=` `/=` `+=` `-=` `&=` `^=` etc.                 | Right    |
+| spread                   | `...` `...?`                                           | None     |
+
+<Alert type="warning">
+  Önceki tablo yalnızca yardımcı bir kılavuz olarak kullanılmalıdır. Operatör önceliği ve
+  ilişkisellik kavramı, dil gramerinde bulunan gerçeğin bir yaklaşımıdır.
+</Alert>
+
+- Operatörleri kullandığınızda ifadeler yaratırsınız. İşte operatör ifadelerinin bazı örnekleri:
+
+```Dart
+a++
+a + b
+a = b
+a == b
+c ? a : b
+a is T
+```
+
+## Operatör önceliği örneği
+
+- Operatör tablosunda , her operatör onu izleyen satırlardaki operatörlerden daha yüksek önceliğe sahiptir. Örneğin, çarpma operatörü, mantıksal AND operatöründen daha yüksek önceliğe sahip olan %eşitlik operatöründen daha yüksek önceliğe sahiptir (ve dolayısıyla daha önce yürütülür) . Bu öncelik, aşağıdaki iki satır kodun aynı şekilde yürütüldüğü anlamına gelir:`==&&`
+
+```Dart
+// Parantezler okunabilirliği artırır.
+if ((n % i == 0) && (d % i == 0)) ...
+
+// Okunması daha zor ama eşdeğer.
+if (n % i == 0 && d % i == 0) ...
+```
+
+<Alert type="warning">
+  İki işlenen alan operatörler için, en soldaki işlenen hangi yöntemin kullanılacağını belirler.
+  Örneğin, bir `Vector` nesneniz ve bir `Point` nesneniz varsa, `aVector` + `aPoint` `Vector`
+  toplamasını `(+)` kullanır.
+</Alert>
+
+## Aritmetic operatörler
+
+- Dart, aşağıdaki tabloda gösterildiği gibi, olağan aritmetik operatörleri destekler.
+
+- Örnek
+
+```Dart
+assert(2 + 3 == 5);
+assert(2 - 3 == -1);
+assert(2 * 3 == 6);
+assert(5 / 2 == 2.5); // Result is a double
+assert(5 ~/ 2 == 2); // Result is an int
+assert(5 % 2 == 1); // Remainder
+
+assert('5/2 = ${5 ~/ 2} r ${5 % 2}' == '5/2 = 2 r 1');
+```
+
+<Alert type="note">
+Dart ayrıca hem prefix hem de postfix artırma ve azaltma operatörlerini destekler.
+</Alert>
+
+## Artırma ve Azaltma Operatörleri Tablosu
+
+| Operatör | Anlam                                    |
+| -------- | ---------------------------------------- |
+| `++var`  | `var = var + 1` (ifade değeri `var + 1`) |
+| `var++`  | `var = var + 1` (ifade değeri `var`)     |
+| `--var`  | `var = var - 1` (ifade değeri `var - 1`) |
+| `var--`  | `var = var - 1` (ifade değeri `var`)     |
+
+### Kullanım Örneği
+
+```dart
+void main() {
+ var a = 5;
+
+ print(++a); // Çıktı: 6 (önce artırır, sonra değeri döndürür)
+ print(a);   // Çıktı: 6
+
+ var b = 5;
+ print(b++); // Çıktı: 5 (önce değeri döndürür, sonra artırır)
+ print(b);   // Çıktı: 6
+
+ var c = 5;
+ print(--c); // Çıktı: 4 (önce azaltır, sonra değeri döndürür)
+ print(c);   // Çıktı: 4
+
+ var d = 5;
+ print(d--); // Çıktı: 5 (önce değeri döndürür, sonra azaltır)
+ print(d);   // Çıktı: 4
+}
+```
+
+## Eşitlik ve ilişkisel operatörler
+
+- Aşağıdaki tabloda eşitlik ve ilişkisel operatörlerin anlamları listelenmiştir.
+
+### Karşılaştırma Operatörleri Tablosu
+
+| Operatör | Anlam                            |
+| -------- | -------------------------------- |
+| `==`     | Eşit; aşağıdaki tartışmaya bakın |
+| `!=`     | Eşit değil                       |
+| `>`      | Daha büyük                       |
+| `<`      | Daha az                          |
+| `>=`     | Büyük veya eşit                  |
+| `<=`     | Küçük veya eşit                  |
+
+### Kullanım Örneği
+
+```dart
+void main() {
+ var a = 5;
+ var b = 3;
+
+ print(a == b); // Çıktı: false
+ print(a != b); // Çıktı: true
+ print(a > b);  // Çıktı: true
+ print(a < b);  // Çıktı: false
+ print(a >= b); // Çıktı: true
+ print(a <= b); // Çıktı: false
+}
+```
+
+## Nesne Karşılaştırma ve `==` Operatörü
+
+İki nesnenin (x ve y) aynı şeyi temsil edip etmediğini test etmek için `==` operatörü kullanılır. (Eğer iki nesnenin tamamen aynı nesne olup olmadığını kontrol etmeniz gereken nadir durumlarda `identical()` fonksiyonunu kullanın.)
+
+### `==` Operatörü Nasıl Çalışır?
+
+1. Eğer `x` veya `y`'den biri `null` ise:
+
+   - Her ikisi de `null` ise `true` döner
+   - Sadece biri `null` ise `false` döner
+
+2. Diğer durumlarda, `x` nesnesinin `==` metodunu `y` argümanıyla çağırarak sonucu döndürür.
+
+<Alert type="note">
+`==` gibi operatörler aslında ilk operandları üzerinde çağrılan metodlardır.
+</Alert>
+
+### Örnek Kullanım
+
+```dart
+void main() {
+  // Eşitlik kontrolü
+  assert(2 == 2);    // true - sayılar eşit
+  assert(2 != 3);    // true - sayılar eşit değil
+
+  // Büyüklük-küçüklük karşılaştırması
+  assert(3 > 2);     // true - 3, 2'den büyük
+  assert(2 < 3);     // true - 2, 3'ten küçük
+  assert(3 >= 3);    // true - 3, 3'e eşit veya büyük
+  assert(2 <= 3);    // true - 2, 3'ten küçük veya eşit
+
+  // Null karşılaştırma örnekleri
+  String? a = null;
+  String? b = null;
+  String c = "test";
+
+  assert(a == b);    // true - iki null değer eşittir
+  assert(a != c);    // true - null ile null olmayan eşit değildir
+}
+```
+
+## Tip Test Operatörleri Tablosu
+
+| Operatör | Anlam                                                          |
+| -------- | -------------------------------------------------------------- |
+| `as`     | Typecast (ayrıca `library prefixes` belirtmek için kullanılır) |
+| `is`     | Nesne belirtilen tipe sahipse true döner                       |
+| `is!`    | Nesne belirtilen tipe sahip değilse true döner                 |
+
+### Tip Kontrolü ve Runtime'da Type Testing
+
+`as`, `is`, ve `is!` operatörleri, runtime sırasında tip kontrolü yapmak için kullanışlı araçlardır. Bir nesnenin (`obj`) belirli bir tipi (`T`) uygulayıp uygulamadığını kontrol etmek için kullanılırlar.
+
+Örneğin, `obj is Object?` her zaman true değerini döndürür çünkü her nesne `Object`'ten türer.
+
+### `as` Operatörü Kullanımı
+
+`as` operatörünü yalnızca bir nesnenin belirli bir tipte olduğundan kesinlikle eminseniz kullanın.
+
+```dart
+void main() {
+ // DİKKAT: Bu kullanım risklidir
+ (employee as Person).firstName = 'Bob';
+}
+```
+
+### `is` Operatörü Kullanımı
+
+- Nesnenin tipinden emin değilseniz, nesneyi kullanmadan önce is ile tip kontrolü yapın.
 
 ```Dart
 void main() {
-  // Okuyarak Öğren
-  print('Hello World!');
+  // DOĞRU YAKLAŞIM: Önce tip kontrolü yap
+  if (employee is Person) {
+    employee.firstName = 'Bob';  // Güvenli kullanım
+  }
 }
 ```
 
-## Çok satırlı yorumlar
+<Alert type="warning">
+Yukarıdaki iki kod örneği birbirine eşdeğer değildir:
 
-* Çok satırlı bir yorum `/*` ile başlar ve `*/` ile biter . `/*` ve `*/` arasındaki her şey Dart derleyicisi tarafından yok sayılır. Çok satırlı yorumlar iç içe geçebilir.
+İlk örnekte (as kullanımı), eğer employee null ise veya Person tipinde değilse, program exception fırlatır.
+İkinci örnekte (is kullanımı), eğer koşul sağlanmazsa blok içine girmez ve herhangi bir hata oluşmaz.
+</Alert>
 
-```
+<Alert type="tip">
+Kullanım Önerileri
+
+Tip dönüşümlerinde öncelikle is ile kontrol yapın
+as operatörünü sadece tipten kesinlikle emin olduğunuz durumlarda kullanın
+Null olabilecek değişkenlerle çalışırken ekstra dikkatli olun
+is! operatörünü bir tipin olmaması durumunu kontrol etmek için kullanın
+</Alert>
+
+```Dart
 void main() {
-/* 
-  Bu bir çoklu yorum satırıdır.
-  İstediğiniz kadar satır ekleyebilirsiniz!
-  Dart bunu görmezden gelecektir 
-*/
+  dynamic value = 42;
+
+  // is kullanımı
+  if (value is int) {
+    print('Bu bir tam sayıdır');
+  }
+
+  // is! kullanımı
+  if (value is! String) {
+    print('Bu bir string değildir');
+  }
+
+  // as kullanımı (dikkatli kullanılmalı)
+  try {
+    String text = value as String;  // Runtime hatası!
+  } catch (e) {
+    print('Tip dönüşümü başarısız: $e');
+  }
 }
 ```
 
-## Belgeleme yorumları
+## Atama operatörleri
 
-* Documentation comments, Dart'ta kod dokümantasyonu oluşturmak için kullanılan özel yorum satırlarıdır. Bu yorumlar, dart doc aracı tarafından otomatik olarak işlenerek güzel bir API dokümantasyonuna dönüştürülür.
+- Daha önce gördüğünüz gibi, `=` operatör kullanarak değerler atayabilirsiniz. Yalnızca atanmış değişken `null` olduğunda atama yapmak için `??=` operatörü kullanın.
 
-* Documentation comments iki şekilde yazılabilir:
-    - Tek satırlı format: ///
-    - Çok satırlı format: /**  */
-
-```
-/// Bu bir tek satırlı documentation comment örneğidir
-void birMethod() {}
-
-/** 
-  Bu ise çok satırlı
-  documentation comment örneğidir
-*/
-void digerMethod() {}
+```Dart
+// a ya bir değer atayın
+a = value;
+// b boşsa b'ye değer ata; aksi takdirde b aynı kalır
+b ??= value;
 ```
 
-:::note
-Documentation comments içinde köşeli parantez [] kullanarak kodunuzdaki diğer elemanlara referans verebilirsiniz.
-:::
+- `+=` gibi bileşik atama operatörleri bir işlemi bir atamayla birleştirir.
 
-### En İyi Uygulamalar
+## Bileşik Atama (Compound Assignment) Operatörleri
 
-1. **Açıklayıcı Olun**
+`+=` gibi bileşik atama operatörleri, bir operasyonu atama işlemiyle birleştirir.
 
-* Her public API elemanını dokümante edin
-* Methodların ne yaptığını net bir şekilde açıklayın
-* Parametrelerin ne işe yaradığını belirtin
+### Mevcut Operatörler
 
+| Birinci Grup              | İkinci Grup                | Üçüncü Grup      |
+| ------------------------- | -------------------------- | ---------------- |
+| `=` `*=` `%=` `>>>=` `^=` | `+=` `/=` `<<=` `&=` `\|=` | `-=` `~/=` `>>=` |
 
-2. **Format Kuralları**
+### Operatörlerin Çalışma Mantığı
 
-* Her documentation comment bir tam cümle ile başlamalı
-* Noktalama işaretlerine dikkat edin
-* Paragraflar arasında boş satır bırakın
+Bir `op` operatörü için:
 
-
-3. **Örnekler Ekleyin**
+```dart
+a op= b
 ```
-/// String'i tersine çevirir.
-///
-/// Örnek:
-/// ```dart
-/// print(reverseString('hello')); // Çıktı: 'olleh'
-/// ```
-String reverseString(String input) {
-  return input.split('').reversed.join();
+
+- ifadesi, aşağıdaki ile aynı anlama gelir:
+
+```Dart
+a = a op b
+```
+
+### Örnek Açıklama
+
+- Eğer `+=` operatörünü ele alırsak:
+
+```Dart
+a += b
+// ifadesi şuna eşdeğerdir:
+a = a + b
+```
+
+### Pratik Kullanım Örneği
+
+```Dart
+void main() {
+  // Temel atama operatörü ile değer atama
+  var a = 2;  // = operatörü ile başlangıç değeri atama
+
+  // Bileşik atama operatörü kullanımı
+  a *= 3;     // Çarpma ve atama: a = a * 3
+
+  // Sonucu kontrol etme
+  assert(a == 6);  // true, çünkü 2 * 3 = 6
+
+  // Diğer bileşik atama örnekleri
+  var b = 10;
+  b += 5;     // b = 15 (toplama ve atama)
+  b -= 3;     // b = 12 (çıkarma ve atama)
+  b ~/= 2;    // b = 6  (tam sayı bölme ve atama)
+  b %= 4;     // b = 2  (mod  ve atama)
 }
 ```
 
-4. Özel Durumları Belirtin
+<Alert type="tip">
 
-* Methodun fırlatacağı exception'ları belirtin
-* Null olabilecek değerleri işaretleyin
-* Performans uyarılarını ekleyin
+1. Bileşik atama operatörleri kod yazımını daha kısa ve okunabilir hale getirir
+2. Her aritmetik veya bitsel operatörün bir bileşik atama karşılığı vardır
+3. Operatörler soldan sağa doğru değerlendirilir
+4. İşlem ve atama tek bir adımda gerçekleşir
+5. Bileşik atama operatörleri özellikle döngülerde ve matematik işlemlerinde kod tekrarını azaltmak için çok kullanışlıdır.
+</Alert>
 
-### Dart Doc Etiketleri
+## Mantıksal operatörler
 
-* @deprecated - Kullanımdan kaldırılmış API'ları işaretler
-* @override - Override edilmiş methodları belirtir
-* @required - Zorunlu parametreleri işaretler
-* @todo - Yapılacak işleri belirtir
+- Mantıksal operatörleri kullanarak Boole ifadelerini tersine çevirebilir veya birleştirebilirsiniz.
+
+### Mantıksal Operatörler Tablosu
+
+| Operatör | Anlam                                                         |
+| -------- | ------------------------------------------------------------- | --- | -------------- |
+| `!expr`  | aşağıdaki ifadeyi tersine çevirir (false'ı true'ya, ve tersi) |
+| `        |                                                               | `   | mantıksal VEYA |
+| `&&`     | mantıksal VE                                                  |
+
+### Kullanım Örneği
+
+```dart
+void main() {
+ bool a = true;
+ bool b = false;
+
+ // ! operatörü
+ print(!a);      // Çıktı: false (true'nun tersi)
+ print(!b);      // Çıktı: true  (false'un tersi)
+
+ // || operatörü (VEYA)
+ print(a || b);  // Çıktı: true  (en az biri true)
+ print(b || b);  // Çıktı: false (ikisi de false)
+
+ // && operatörü (VE)
+ print(a && b);  // Çıktı: false (ikisi birden true değil)
+ print(a && a);  // Çıktı: true  (ikisi de true)
+}
+```
+
+<Alert type="note">
+
+1. ! operatörü tekli (unary) bir operatördür ve sadece boolean değerleri tersine çevirir
+2. || operatöründe ifadelerden birinin true olması yeterlidir
+3. && operatöründe tüm ifadelerin true olması gerekir
+4. && operatörü || operatöründen daha yüksek önceliğe sahiptir
+</Alert >
+
+- Mantıksal operatörler genellikle koşul ifadelerinde ve kontrol akışlarında kullanılır:
+
+```Dart
+if (!isLoading && (isAdmin || hasPermission)) {
+  // İşlemler burada
+}
+```
+
+## Koşullu ifadeler
+
+- Dart, if-else ifadelerinin yerine kullanılabilecek iki özel operatör sunar:
+
+### 1. Koşul (Ternary) Operatörü: `condition ? expr1 : expr2`
+
+```dart
+if ? ifade1 : ifade2
+```
+
+- Eğer koşul true ise, ifade1 değerlendirilir ve sonucu döndürülür
+- Eğer koşul false ise, ifade2 değerlendirilir ve sonucu döndürülür
+
+```Dart
+void main() {
+  var isPublic = true;
+  var visibility = isPublic ? 'public' : 'private';
+  print(visibility); // Çıktı: 'public'
+}
+```
+
+### Null-Coalescing (If-Null) Operatörü: expr1 ?? expr2
 
 ```
-/// Bu eski bir method, bunun yerine [yeniMethod] kullanın.
-@deprecated
-void eskiMethod() {}
+ifade1 ?? ifade2
 ```
 
-* İyi yazılmış documentation comments:
+- Eğer ifade1 null değilse, değeri döndürülür
+- Eğer ifade1 null ise, ifade2 değerlendirilir ve sonucu döndürülür
 
-    - Kodunuzu daha anlaşılır kılar
-    - Ekip içi iletişimi kolaylaştırır
-    - Otomatik dokümantasyon oluşturmayı sağlar
-    - Kodunuzun bakımını kolaylaştırır
+```Dart
+void main() {
+  String? name;
+  print(name ?? 'Misafir'); // Çıktı: 'Misafir'
+
+  name = 'Ahmet';
+  print(name ?? 'Misafir'); // Çıktı: 'Ahmet'
+}
+```
+
+<Alert type="note">
+
+1. ?? operatörü özellikle null kontrolü gerektiren durumlarda kodu daha okunabilir hale getirir
+2. Ternary operatör (?:) basit if-else ifadelerini tek satırda yazmamızı sağlar
+3. Her iki operatör de kodun daha kısa ve öz olmasını sağlar
+4. Bu operatörler iç içe kullanılabilir, ancak okunabilirlik için dikkatli olunmalıdır
+</Alert>
+
+<Alert type="warning">
+İç içe fazla koşul operatörü kullanmak kodun okunabilirliğini azaltabilir. Böyle durumlarda klasik if-else yapısını tercih etmek daha iyi olabilir.
+</Alert>
+
 ## Quiz
 
-<TabbedContent code >
+<TabContent>
 <TabItem value="Soru"> 
 <br/>
-Bu örnekte üçüncü satırdaki yorum türü nedir?
+Bu kod çalıştığında çıktı ne olur?
 ```
-// Bu bir yorum satırı
-/* Bu bir çoklu
-   yorum satırı */
-/// Bu nasıl bir yorum satırı?
+int a = 5;
+print(a++);
+print(a);
 ```
 <br/>
-</TabItem> 
+</TabItem>
 
 <TabItem value="Cevap"> 
 <br/>
-Documentation comment (Belgeleme yorumu). Bu tür yorumlar /// ile başlar ve Dart Doc tarafından otomatik olarak API dokümantasyonu oluşturmak için kullanılır.
+```
+5
+6
+// Çünkü a++ postfix operatörü önce mevcut değeri kullanır, sonra artırır.
+```
 <br/>
 </TabItem> 
-</TabbedContent> 
+</TabContent>
 
-<TabbedContent code >
+<TabContent code >
 <TabItem value="Soru"> 
 <br/>
-Bu kod geçerli midir? Neden?
+Bu kod çalıştığında result değişkeninin değeri ne olur?
 ```
-/*
-  Bu bir yorum
-  /* Bu da içeride bir yorum */
-  Hala yorum içindeyiz
-*/
+String? name;
+String result = name ?? 'Misafir';
+print(result);
 ```
 <br/>
-</TabItem> 
+</TabItem>
 
 <TabItem value="Cevap"> 
 <br/>
-Evet, geçerlidir. Çünkü Dart'ta çok satırlı yorumlar iç içe (nested) olabilir.
+```
+//'Misafir'
+// Çünkü ?? operatörü, sol taraftaki değer null ise sağ taraftaki değeri kullanır.
+```
 <br/>
 </TabItem> 
-</TabbedContent> 
+</TabContent>
 
-
-<TabbedContent code >
+<TabContent code >
 <TabItem value="Soru"> 
 <br/>
-Aşağıdaki documentation comment'te köşeli parantezlerin [[]] amacı nedir?
+Bu kod çalıştığında çıktı ne olur?
 ```
-/// [name] parametresi kullanıcının adını alır
-/// [age] parametresi kullanıcının yaşını alır
-void createUser(String name, int age) {}
+int x = 10;
+int y = 3;
+print(x ~/ y);
 ```
 <br/>
-</TabItem> 
+</TabItem>
 
 <TabItem value="Cevap"> 
 <br/>
-Köşeli parantezler, documentation comments içinde kod elemanlarına (parametreler, methodlar, sınıflar vb.) referans vermek için kullanılır.
+```
+3
+// Çünkü ~/ operatörü tam sayı bölme işlemi yapar ve sadece tam kısmı alır.
+```
 <br/>
 </TabItem> 
-</TabbedContent> 
+</TabContent>
 
-<TabbedContent code >
+<TabContent code >
 <TabItem value="Soru"> 
 <br/>
-Bu iki yorum satırı arasındaki temel fark nedir?
+Bu kod çalıştığında a'nın son değeri ne olur?
 ```
-// TODO: Bu methodu güncelle
-void oldMethod() {}
-
-/// @deprecated 'newMethod()' kullanın
-void oldMethod2() {}
+int a = 5;
+a *= 3;
+a += 2;
+print(a);
 ```
 <br/>
-</TabItem> 
+</TabItem>
 
 <TabItem value="Cevap"> 
 <br/>
-İlk satır basit bir TODO yorumu iken, ikinci satır bir documentation comment ve @deprecated etiketidir. İkincisi Dart Doc tarafından işlenir ve resmi dokümantasyonda görünür.
+```
+17
+//Çünkü önce a'yı 3 ile çarpıp (15), sonra 2 ekliyor (17).
+```
 <br/>
 </TabItem> 
-</TabbedContent> 
+</TabContent>
 
-<TabbedContent code >
+<TabContent code >
 <TabItem value="Soru"> 
 <br/>
-Bu kod parçasında kaç farklı yorum stili kullanılmıştır?
+Bu kod çalıştığında a'nın son değeri ne olur?
 ```
-void calculate() {
-  // Bu bir yorum
-  int x = 5; // Bu da bir yorum
-  /* Bu da
-     bir yorum */
-}
+int age = 20;
+String result = age > 18 ? "Yetişkin" : "Çocuk";
+print(result);
 ```
 <br/>
-</TabItem> 
+</TabItem>
 
 <TabItem value="Cevap"> 
 <br/>
-2 farklı yorum stili kullanılmıştır:
-
-Tek satırlık yorumlar (//)
-Çok satırlı yorumlar (/* */)
+```
+//"Yetişkin"
+//Çünkü ternary operatörde koşul doğru olduğu için (age > 18) ilk değer seçilir.
+```
 <br/>
 </TabItem> 
-</TabbedContent> 
+</TabContent>
