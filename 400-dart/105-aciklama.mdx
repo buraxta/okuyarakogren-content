@@ -3,23 +3,24 @@ title: "Açıklama"
 layout: "okuyarakogren-content"
 topic: "Açıklama"
 description: "Bu derste oparatör hakkında genel bir bilgilendirme yapılmaktadır."
-slug: dart/5_
-prev_page: /dart/4_
-prev_title: "Operator"
-next_title: "Library"
-next_page: /dart/6_
+slug: dart/105-aciklama
+prev_page: /dart/104-yorum-satirlari
+prev_title: "Yorum Satırları"
+next_title: "Kütüphane"
+next_page: /dart/106-kutuphane
 git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/5_.mdx
+pageType: "Dart"
 ---
 
-<BorderBox>
+<Box>
   <BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
-  <span style={{ fontSize: "24px" }}>
+   <ParagraphHighlight>
     Kodunuza süper güçler kazandırmaya hazır mısınız?\ İşte karşınızda Metadata! Bu küçük `@`
     işaretli süper kahramanlar, kodunuza ekstra bilgiler ekler, özel yetenekler kazandırır ve onu
     daha akıllı hale getirir.\ Bir süper kahraman gibi kodunuzu güçlendirecek, bir etiketleyici gibi
     organize edecek ve bir büyücü gibi özel yetenekler katacaksınız.\ Metadata büyüsü başlasın! ✨
-  </span>
-</BorderBox>
+   </ParagraphHighlight>
+</Box>
 
 - Kodunuz hakkında ek bilgi vermek için meta verileri kullanın. Bir meta veri açıklaması `@` karakteriyle başlar ve bunu derleme zamanı sabitine (örneğin deprecated) bir başvuru veya sabit oluşturucuya bir çağrı izler.
 
@@ -63,7 +64,7 @@ void doSomething() {
 
 ## Quiz
 
-<TabContent code >
+<TabbedContent code >
 <TabItem value="Soru"> 
 <br/>
 Bu iki annotation arasındaki fark nedir ve hangisini kullanmak daha iyi bir pratiktir?
@@ -83,11 +84,11 @@ void anotherOldFunction() {}
 @Deprecated mesaj parametresi alırken, @deprecated almaz. Dart'ta @Deprecated kullanmak ve bir açıklama mesajı eklemek daha iyi bir pratiktir çünkü diğer geliştiricilere hangi alternatifi kullanmaları gerektiğini açıkça belirtir.
 <br/>
 </TabItem>
-</TabContent>
+</TabbedContent>
 
 
 
-<TabContent code >
+<TabbedContent code >
 <TabItem value="Soru">
 <br/>
 Bu kod çalışır mı? Eğer çalışırsa, ne işe yarar?
@@ -112,10 +113,10 @@ void updateLogin() {}
 Evet, çalışır. Bu, özel bir metadata annotation'ıdır. Task sınıfı bir metadata olarak kullanılabilir çünkü const constructor'a sahip. Bu annotation, updateLogin fonksiyonuna görevin kime atandığı ve ne yapılması gerektiği bilgisini ekler.
 <br/>
 </TabItem>
-</TabContent>
+</TabbedContent>
 
 
-<TabContent code >
+<TabbedContent code >
 <TabItem value="Soru">
 <br/>
 @override annotation'ı burada ne işe yarıyor?
@@ -141,9 +142,9 @@ print('Woof!');
 @override annotation'ı, bir metodun üst sınıftaki bir metodu override ettiğini (yeniden tanımladığını) açıkça belirtir. Bu, kodun okunabilirliğini artırır ve yanlışlıkla yanlış metot imzası kullanılmasını önler.
 <br/>
 </TabItem>
-</TabContent>
+</TabbedContent>
 
-<TabContent code >
+<TabbedContent code >
 <TabItem value="Soru">
 <br/>
 Bir kod parçasına birden fazla metadata annotation eklenebilir mi? Bu örnekte ne oluyor?
@@ -162,9 +163,9 @@ void oldFunction() {}
 Evet, birden fazla metadata annotation eklenebilir. Bu örnekte, fonksiyon hem yapılması gereken bir işi (@Todo) belirtiyor, hem de kullanımdan kaldırılmış (@Deprecated) olduğunu gösteriyor.
 <br/>
 </TabItem>
-</TabContent>
+</TabbedContent>
 
-<TabContent code >
+<TabbedContent code >
 <TabItem value="Soru">
 <br/>
 Bu kodda metadata olarak kullanılan sınıfın constructor'ı neden const olmalıdır?
@@ -193,5 +194,5 @@ print('Test message');
 Metadata'lar compile-time'da değerlendirilmelidir, bu yüzden constructor'ların const olması gerekir. const constructor'lar, derleme zamanında sabit değerler oluşturur ve bu değerler metadata olarak kullanılabilir.
 <br/>
 </TabItem>
-</TabContent>
+</TabbedContent>
 ```

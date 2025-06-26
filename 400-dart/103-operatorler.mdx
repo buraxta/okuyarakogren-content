@@ -1,28 +1,28 @@
 ---
 title: "Operatörler"
 layout: "okuyarakogren-content"
-topic: "Operatorler"
+topic: "Operatörler"
 description: "Bu derste Dart hakkında genel bir bilgilendirme yapılmaktadır."
-slug: dart/3_
-prev_page: /dart/2_
+slug: dart/103-operatorler
+prev_page: /dart/102-degiskenler
 prev_title: "İndirme ve Kurma"
-next_page: /dart/4_
+next_page: /dart/104-yorum-satirlari
 next_title: "Yorum Satırları"
 git_page_link: https://github.com/buraxta/okuyarakogren-content/blob/master/400-dart/3_.mdx
-pageType: "dart"
+pageType: "Dart"
 ---
 
-<BorderBox>
+<Box>
 <BoxTitle>Selam Kod Kaşifi! 👋</BoxTitle>
-<span style={{ fontSize: '24px' }}>
+<ParagraphHighlight>
 Kod dünyasının gizli süper kahramanlarıyla tanışmaya hazır mısın?\
 Evet, operatörlerden bahsediyoruz!\
 Operatörler, kodunu anlamlı hale getiren küçük ama etkili araçlardır. Onlar olmadan toplama yapamaz, karşılaştırmalar gerçekleştiremez ve hatta en basit kararları bile veremezdik!
 
 Bir matematikçi gibi toplama-çıkarma yapabilir, bir dedektif gibi eşitlikleri sorgulayabilir ya da bir büyücü gibi bitlerle oynayabilirsin. Hazırsan, operatörlerin sihirli dünyasına dalıyoruz. Hadi, kodun gücünü hisset!
 
-</span>
-</BorderBox>
+</ParagraphHighlight>
+</Box>
 
 ## Operatörler
 
@@ -50,6 +50,7 @@ Bir matematikçi gibi toplama-çıkarma yapabilir, bir dedektif gibi eşitlikler
 | assignment               | `=` `*=` `/=` `+=` `-=` `&=` `^=` etc.                 | Right    |
 | spread                   | `...` `...?`                                           | None     |
 
+<br />
 <Alert type="warning">
   Önceki tablo yalnızca yardımcı bir kılavuz olarak kullanılmalıdır. Operatör önceliği ve
   ilişkisellik kavramı, dil gramerinde bulunan gerçeğin bir yaklaşımıdır.
@@ -102,7 +103,7 @@ assert('5/2 = ${5 ~/ 2} r ${5 % 2}' == '5/2 = 2 r 1');
 ```
 
 <Alert type="note">
-Dart ayrıca hem prefix hem de postfix artırma ve azaltma operatörlerini destekler.
+  Dart ayrıca hem prefix hem de postfix artırma ve azaltma operatörlerini destekler.
 </Alert>
 
 ## Artırma ve Azaltma Operatörleri Tablosu
@@ -182,7 +183,7 @@ void main() {
 2. Diğer durumlarda, `x` nesnesinin `==` metodunu `y` argümanıyla çağırarak sonucu döndürür.
 
 <Alert type="note">
-`==` gibi operatörler aslında ilk operandları üzerinde çağrılan metodlardır.
+  `==` gibi operatörler aslında ilk operandları üzerinde çağrılan metodlardır.
 </Alert>
 
 ### Örnek Kullanım
@@ -248,19 +249,15 @@ void main() {
 ```
 
 <Alert type="warning">
-Yukarıdaki iki kod örneği birbirine eşdeğer değildir:
-
-İlk örnekte (as kullanımı), eğer employee null ise veya Person tipinde değilse, program exception fırlatır.
-İkinci örnekte (is kullanımı), eğer koşul sağlanmazsa blok içine girmez ve herhangi bir hata oluşmaz.
+  Yukarıdaki iki kod örneği birbirine eşdeğer değildir: İlk örnekte (as kullanımı), eğer employee
+  null ise veya Person tipinde değilse, program exception fırlatır. İkinci örnekte (is kullanımı),
+  eğer koşul sağlanmazsa blok içine girmez ve herhangi bir hata oluşmaz.
 </Alert>
 
 <Alert type="tip">
-Kullanım Önerileri
-
-Tip dönüşümlerinde öncelikle is ile kontrol yapın
-as operatörünü sadece tipten kesinlikle emin olduğunuz durumlarda kullanın
-Null olabilecek değişkenlerle çalışırken ekstra dikkatli olun
-is! operatörünü bir tipin olmaması durumunu kontrol etmek için kullanın
+  Kullanım Önerileri Tip dönüşümlerinde öncelikle is ile kontrol yapın as operatörünü sadece tipten
+  kesinlikle emin olduğunuz durumlarda kullanın Null olabilecek değişkenlerle çalışırken ekstra
+  dikkatli olun is! operatörünü bir tipin olmaması durumunu kontrol etmek için kullanın
 </Alert>
 
 ```Dart
@@ -356,12 +353,10 @@ void main() {
 ```
 
 <Alert type="tip">
-
-1. Bileşik atama operatörleri kod yazımını daha kısa ve okunabilir hale getirir
-2. Her aritmetik veya bitsel operatörün bir bileşik atama karşılığı vardır
-3. Operatörler soldan sağa doğru değerlendirilir
-4. İşlem ve atama tek bir adımda gerçekleşir
-5. Bileşik atama operatörleri özellikle döngülerde ve matematik işlemlerinde kod tekrarını azaltmak için çok kullanışlıdır.
+  1. Bileşik atama operatörleri kod yazımını daha kısa ve okunabilir hale getirir 2. Her aritmetik
+  veya bitsel operatörün bir bileşik atama karşılığı vardır 3. Operatörler soldan sağa doğru
+  değerlendirilir 4. İşlem ve atama tek bir adımda gerçekleşir 5. Bileşik atama operatörleri
+  özellikle döngülerde ve matematik işlemlerinde kod tekrarını azaltmak için çok kullanışlıdır.
 </Alert>
 
 ## Mantıksal operatörler
@@ -371,10 +366,10 @@ void main() {
 ### Mantıksal Operatörler Tablosu
 
 | Operatör | Anlam                                                         |
-| -------- | ------------------------------------------------------------- | --- | -------------- |
-| `!expr`  | aşağıdaki ifadeyi tersine çevirir (false'ı true'ya, ve tersi) |
-| `        |                                                               | `   | mantıksal VEYA |
-| `&&`     | mantıksal VE                                                  |
+| -------- | ------------------------------------------------------------- |
+| `!expr`  | Aşağıdaki ifadeyi tersine çevirir (false'u true'ya, ve tersi) |
+| `\|\|`   | Mantıksal VEYA (iki ifadeden biri true ise sonuç true olur)   |
+| `&&`     | Mantıksal VE (iki ifade de true ise sonuç true olur)          |
 
 ### Kullanım Örneği
 
@@ -398,12 +393,10 @@ void main() {
 ```
 
 <Alert type="note">
-
-1. ! operatörü tekli (unary) bir operatördür ve sadece boolean değerleri tersine çevirir
-2. || operatöründe ifadelerden birinin true olması yeterlidir
-3. && operatöründe tüm ifadelerin true olması gerekir
-4. && operatörü || operatöründen daha yüksek önceliğe sahiptir
-</Alert >
+  1. ! operatörü tekli (unary) bir operatördür ve sadece boolean değerleri tersine çevirir 2. ||
+  operatöründe ifadelerden birinin true olması yeterlidir 3. && operatöründe tüm ifadelerin true
+  olması gerekir 4. && operatörü || operatöründen daha yüksek önceliğe sahiptir
+</Alert>
 
 - Mantıksal operatörler genellikle koşul ifadelerinde ve kontrol akışlarında kullanılır:
 
@@ -454,20 +447,20 @@ void main() {
 ```
 
 <Alert type="note">
-
-1. ?? operatörü özellikle null kontrolü gerektiren durumlarda kodu daha okunabilir hale getirir
-2. Ternary operatör (?:) basit if-else ifadelerini tek satırda yazmamızı sağlar
-3. Her iki operatör de kodun daha kısa ve öz olmasını sağlar
-4. Bu operatörler iç içe kullanılabilir, ancak okunabilirlik için dikkatli olunmalıdır
+  1. ?? operatörü özellikle null kontrolü gerektiren durumlarda kodu daha okunabilir hale getirir 2.
+  Ternary operatör (?:) basit if-else ifadelerini tek satırda yazmamızı sağlar 3. Her iki operatör
+  de kodun daha kısa ve öz olmasını sağlar 4. Bu operatörler iç içe kullanılabilir, ancak
+  okunabilirlik için dikkatli olunmalıdır
 </Alert>
 
 <Alert type="warning">
-İç içe fazla koşul operatörü kullanmak kodun okunabilirliğini azaltabilir. Böyle durumlarda klasik if-else yapısını tercih etmek daha iyi olabilir.
+  İç içe fazla koşul operatörü kullanmak kodun okunabilirliğini azaltabilir. Böyle durumlarda klasik
+  if-else yapısını tercih etmek daha iyi olabilir.
 </Alert>
 
 ## Quiz
 
-<TabContent>
+<TabbedContent>
 <TabItem value="Soru"> 
 <br/>
 Bu kod çalıştığında çıktı ne olur?
@@ -488,9 +481,11 @@ print(a);
 ```
 <br/>
 </TabItem> 
-</TabContent>
+</TabbedContent>
 
-<TabContent code >
+<br />
+
+<TabbedContent code >
 <TabItem value="Soru"> 
 <br/>
 Bu kod çalıştığında result değişkeninin değeri ne olur?
@@ -510,9 +505,11 @@ print(result);
 ```
 <br/>
 </TabItem> 
-</TabContent>
+</TabbedContent>
 
-<TabContent code >
+<br />
+
+<TabbedContent code >
 <TabItem value="Soru"> 
 <br/>
 Bu kod çalıştığında çıktı ne olur?
@@ -532,9 +529,11 @@ print(x ~/ y);
 ```
 <br/>
 </TabItem> 
-</TabContent>
+</TabbedContent>
 
-<TabContent code >
+<br />
+
+<TabbedContent code >
 <TabItem value="Soru"> 
 <br/>
 Bu kod çalıştığında a'nın son değeri ne olur?
@@ -555,9 +554,11 @@ print(a);
 ```
 <br/>
 </TabItem> 
-</TabContent>
+</TabbedContent>
 
-<TabContent code >
+<br />
+
+<TabbedContent code >
 <TabItem value="Soru"> 
 <br/>
 Bu kod çalıştığında a'nın son değeri ne olur?
@@ -577,4 +578,4 @@ print(result);
 ```
 <br/>
 </TabItem> 
-</TabContent>
+</TabbedContent>
